@@ -2,7 +2,10 @@
     <string name="app_name">Dance Events</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="dash"> - </string>
+    <string name="dash" > - </string>
+    <string name="date">Дата:</string>
+    <string name="location">Место:</string>
+    <string name="contacts">Контакты:</string>
 
     <string-array name="month_array">
         <item>Январь</item>
