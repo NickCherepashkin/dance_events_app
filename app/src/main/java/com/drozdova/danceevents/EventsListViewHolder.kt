@@ -1,8 +1,10 @@
 package com.drozdova.danceevents
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.drozdova.danceevents.databinding.ItemEventVerBinding
 
-class EventsListViewHolder(view: View) : ViewHolder(view) {
+class EventsListViewHolder(
+    private val view: ItemEventVerBinding
+) : ViewHolder(view.root) {
 
 }

@@ -3,21 +3,23 @@ package com.drozdova.danceevents
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.util.Calendar
+import com.drozdova.danceevents.databinding.MonthItemBinding
+import java.util.*
 
 class MonthAdapter : RecyclerView.Adapter<MonthViewHolder>() {
+    private var _binding: MonthItemBinding? = null
+    private val binding get() = _binding!!
 
     private var listOfMonths = listOf<String>()
     private var listOfYears = listOf<Int>()
-    private lateinit var adapter: DateAdapter
 
-    fun submit(listOfMonths: List<String>,) {
+    fun submit(listOfMonths: List<String>) {
         this.listOfMonths = listOfMonths
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonthViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.month_item, parent, false)
-        return MonthViewHolder(view)
+        _binding = MonthItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MonthViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MonthViewHolder, position: Int) {

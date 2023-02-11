@@ -1,24 +1,20 @@
 package com.drozdova.danceevents
 
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.google.android.material.textview.MaterialTextView
+import com.drozdova.danceevents.databinding.YearItemBinding
 
 class CalendarViewHolder(
-    private val calendarView: View
-) : ViewHolder(calendarView) {
+    private val view: YearItemBinding
+) : ViewHolder(view.root) {
+
     fun bind( year: Int) {
-        val rvYear = calendarView.findViewById<RecyclerView>(R.id.rv_year)
-        val tvYear = calendarView.findViewById<MaterialTextView>(R.id.tv_year)
+        view.tvYear.text = year.toString()
 
-        tvYear.text = year.toString()
-
-        rvYear.setHasFixedSize(true)
-        rvYear.isNestedScrollingEnabled = true
+        view.rvYear.setHasFixedSize(true)
+        view.rvYear.isNestedScrollingEnabled = true
         val monthAdapter = MonthAdapter()
-        rvYear.adapter = monthAdapter
-        val listOfMonths = calendarView.resources.getStringArray(R.array.month_array).toList()
+        view.rvYear.adapter = monthAdapter
+        val listOfMonths = view.root.resources.getStringArray(R.array.month_array).toList()
         monthAdapter.submit(listOfMonths)
     }
 }
