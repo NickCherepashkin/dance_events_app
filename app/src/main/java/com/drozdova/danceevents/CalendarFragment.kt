@@ -1,30 +1,37 @@
 package com.drozdova.danceevents
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import com.drozdova.danceevents.databinding.FragmentCalendarBinding
 
 class CalendarFragment : Fragment() {
+    private var _binding: FragmentCalendarBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var adapter: CalendarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendar, container, false)
+    ): View {
+        _binding = FragmentCalendarBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val calendar = view.findViewById<RecyclerView>(R.id.rv_calendar)
         adapter = CalendarAdapter()
-        calendar.adapter = adapter
+        binding.rvCalendar.adapter = adapter
         val listOfYears = listOf(2023, 2024)
         adapter.submit(listOfYears)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
