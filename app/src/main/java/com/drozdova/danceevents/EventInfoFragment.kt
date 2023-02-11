@@ -20,7 +20,7 @@ class EventInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tvDescription = view.findViewById<MaterialTextView>(R.id.tv_event_description)
+        val tvDescription = view.findViewById<MaterialTextView>(R.id.tvi_event_description)
         tvDescription.movementMethod = ScrollingMovementMethod()
     }
 }
