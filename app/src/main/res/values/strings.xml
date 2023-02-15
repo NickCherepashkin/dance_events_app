@@ -8,6 +8,10 @@
     <string name="contacts">Контакты:</string>
     <string name="search">Поиск</string>
     <string name="search_hint">По названию.....</string>
+    <string name="menu_calendar">Календарь</string>
+    <string name="menu_events">События</string>
+    <string name="menu_search">Поиск</string>
+    <string name="menu_favorites">Избранное</string>
 
 
     <string-array name="month_array">
