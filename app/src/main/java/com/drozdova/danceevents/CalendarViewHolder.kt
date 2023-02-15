@@ -7,7 +7,7 @@ class CalendarViewHolder(
     private val view: YearItemBinding
 ) : ViewHolder(view.root) {
 
-    fun bind( year: Int) {
+    fun bind(year: Int) {
         view.tvYear.text = year.toString()
 
         view.rvYear.setHasFixedSize(true)
@@ -15,6 +15,6 @@ class CalendarViewHolder(
         val monthAdapter = MonthAdapter()
         view.rvYear.adapter = monthAdapter
         val listOfMonths = view.root.resources.getStringArray(R.array.month_array).toList()
-        monthAdapter.submit(listOfMonths)
+        monthAdapter.submit(year, listOfMonths)
     }
 }

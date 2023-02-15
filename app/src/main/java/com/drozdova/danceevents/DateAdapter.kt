@@ -13,9 +13,9 @@ class DateAdapter : RecyclerView.Adapter<DateViewHolder>() {
     private var year: Int = 0
     private var spaces: Int = 0
 
-    fun submit(days: Int, pos: Int, Y: Int, spaces: Int) {
+    fun submit(days: Int, year: Int, spaces: Int) {
         this.days = days
-        year = Y
+        this.year = year
         this.spaces = spaces
     }
 
