@@ -7,12 +7,12 @@ class MonthViewHolder (
     private val view: MonthItemBinding
 ) : ViewHolder(view.root) {
 
-    fun bind(month: String, days: Int, pos: Int, Y: Int, spaces: Int) {
+    fun bind(month: String, days: Int, year: Int, spaces: Int) {
         view.tvMonth.text = month
         view.rvDate.setHasFixedSize(true)
         view.rvDate.isNestedScrollingEnabled = true
         val dateAdapter = DateAdapter()
         view.rvDate.adapter = dateAdapter
-        dateAdapter.submit(days, pos, Y, spaces)
+        dateAdapter.submit(days, year, spaces)
     }
 }

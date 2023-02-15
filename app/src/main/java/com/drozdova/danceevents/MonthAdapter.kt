@@ -11,9 +11,10 @@ class MonthAdapter : RecyclerView.Adapter<MonthViewHolder>() {
     private val binding get() = _binding!!
 
     private var listOfMonths = listOf<String>()
-    private var listOfYears = listOf<Int>()
+    private var year = 0
 
-    fun submit(listOfMonths: List<String>) {
+    fun submit(year: Int, listOfMonths: List<String>) {
+        this.year = year
         this.listOfMonths = listOfMonths
     }
 
@@ -23,8 +24,7 @@ class MonthAdapter : RecyclerView.Adapter<MonthViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MonthViewHolder, position: Int) {
-
-        val pos = position + 1
+        
         val days = when(position) {
             1 -> 28
             0, 2, 4, 6, 7, 9, 11 -> 31
@@ -32,11 +32,11 @@ class MonthAdapter : RecyclerView.Adapter<MonthViewHolder>() {
         }
 
         val calendar = Calendar.getInstance()
-        calendar.set(2023, position,0)
+        calendar.set(year, position,0)
         val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
         val spaces = dayOfWeek - 1
 
-        holder.bind(listOfMonths[position], days,pos, 2023, spaces)
+        holder.bind(listOfMonths[position], days, year, spaces)
     }
 
     override fun getItemCount(): Int {
