@@ -9,11 +9,16 @@
     android:layout_margin="3dp"
     tools:context=".MonthWithEventsFragment">
 
+    <CalendarView
+        android:id="@+id/cv_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_events_in_month"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_event_ver"/>
+        tools:listitem="@layout/item_event_hor"/>
 
 </LinearLayout>
