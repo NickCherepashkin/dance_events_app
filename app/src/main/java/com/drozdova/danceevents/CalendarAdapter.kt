@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.YearItemBinding
 
-class CalendarAdapter : RecyclerView.Adapter<CalendarViewHolder>() {
+class CalendarAdapter(
+    private val monthListener: MonthListener
+) : RecyclerView.Adapter<CalendarViewHolder>() {
     private var _binding: YearItemBinding? = null
     private val binding get() =_binding!!
 
@@ -17,7 +19,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         _binding = YearItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CalendarViewHolder(binding)
+        return CalendarViewHolder(binding, monthListener)
     }
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {

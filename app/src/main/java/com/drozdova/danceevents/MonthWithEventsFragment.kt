@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drozdova.danceevents.databinding.FragmentMonthWithEventsBinding
+import java.util.*
 
 class MonthWithEventsFragment : Fragment() {
     private var _binding: FragmentMonthWithEventsBinding? = null
@@ -21,6 +22,14 @@ class MonthWithEventsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val calendar = Calendar.getInstance()
+        calendar.set(
+            2024,
+            4,
+            1
+        )
+        binding.cvMonth.date = calendar.timeInMillis
     }
 
     override fun onDestroy() {
