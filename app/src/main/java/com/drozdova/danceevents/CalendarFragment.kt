@@ -41,7 +41,6 @@ class CalendarFragment : Fragment(), MonthListener {
     }
 
     override fun showMonthWithEvents() {
-        val navController = findNavController().navigate(R.id.action_calendarFragment_to_monthWithEventsFragment)
-//        NavigationUI.setupActionBarWithNavController(navController,)
+        findNavController().navigate(R.id.action_calendarFragment_to_monthWithEventsFragment)
     }
 }

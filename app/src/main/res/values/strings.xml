@@ -13,6 +13,11 @@
     <string name="menu_search">Поиск</string>
     <string name="menu_favorites">Избранное</string>
 
+    <string name="cd_calendar">Calendar</string>
+    <string name="cd_events">Events</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_favorite">Favorite</string>
+
 
     <string-array name="month_array">
         <item>Январь</item>
