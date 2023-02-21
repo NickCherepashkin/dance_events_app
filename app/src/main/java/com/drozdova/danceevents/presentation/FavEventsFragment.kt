@@ -1,4 +1,4 @@
-package com.drozdova.danceevents.presentation.model
+package com.drozdova.danceevents.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.drozdova.danceevents.R
+import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.databinding.FragmentFavEventsBinding
-import com.drozdova.danceevents.presentation.model.model.EventModel
+import com.drozdova.danceevents.domain.interactor.EventsInteractor
 
 class FavEventsFragment : Fragment(), EventListener {
     private var _binding: FragmentFavEventsBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: FavEventsAdapter
+    private lateinit var interactor: EventsInteractor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,16 +29,12 @@ class FavEventsFragment : Fragment(), EventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        interactor = EventsInteractor(EventsRepoImpl())
+
         adapter = FavEventsAdapter(this)
         binding.rvFavorite.adapter = adapter
 
-        val list = listOf(
-            EventModel("Winter Cup 2023", "25.02.2023", "26.02.2023"),
-            EventModel("Child and Youth Week", "25.02.2023", "26.02.2023"),
-            EventModel("Minsk Cup", "25.02.2023", "26.02.2023"),
-            EventModel("All2TheStep", "25.02.2023", "26.02.2023"),
-            EventModel("GolJun", "25.02.2023", "26.02.2023")
-        )
+        val list = interactor.getFavEventsList()
 
         adapter.submit(list)
     }

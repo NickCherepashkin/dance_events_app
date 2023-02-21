@@ -1,4 +1,4 @@
-package com.drozdova.danceevents.presentation.model
+package com.drozdova.danceevents.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,14 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.drozdova.danceevents.R
+import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.databinding.FragmentSearchBinding
-import com.drozdova.danceevents.presentation.model.model.EventModel
+import com.drozdova.danceevents.domain.interactor.EventsInteractor
 
 class SearchFragment : Fragment(), EventListener {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: SearchAdapter
+    private lateinit var interactor: EventsInteractor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,14 +29,12 @@ class SearchFragment : Fragment(), EventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        interactor = EventsInteractor(EventsRepoImpl())
+
         adapter = SearchAdapter(this)
         binding.rvSearchEvents.adapter = adapter
 
-        val list = listOf(
-            EventModel("Minsk Cup", "25.02.2023", "26.02.2023"),
-            EventModel("All2TheStep", "25.02.2023", "26.02.2023"),
-            EventModel("GolJun", "25.02.2023", "26.02.2023")
-        )
+        val list = interactor.searchEvents("Cup")
 
         adapter.submit(list)
     }
