@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/favorites"
-    app:startDestination="@id/favoriteEventsFragment">
+    app:startDestination="@id/favEventsFragment">
 
     <fragment
-        android:id="@+id/favoriteEventsFragment"
-        android:name="com.drozdova.danceevents.FavoriteEventsFragment"
+        android:id="@+id/favEventsFragment"
+        android:name="com.drozdova.danceevents.FavEventsFragment"
         android:label="fragment_favorite_events"
-        tools:layout="@layout/fragment_favorite_events" >
+        tools:layout="@layout/fragment_fav_events" >
         <action
-            android:id="@+id/action_favoriteEventsFragment_to_eventInfoFragment3"
+            android:id="@+id/action_favEventsFragment_to_eventInfoFragment3"
             app:destination="@id/eventInfoFragment3" />
     </fragment>
     <fragment

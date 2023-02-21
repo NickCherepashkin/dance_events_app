@@ -9,10 +9,11 @@
         android:id="@+id/eventsListFragment"
         android:name="com.drozdova.danceevents.EventsListFragment"
         android:label="fragment_events_list"
-        tools:layout="@layout/fragment_events_list" >
+        tools:layout="@layout/fragment_events_list">
         <action
             android:id="@+id/action_eventsListFragment_to_eventInfoFragment2"
-            app:destination="@id/eventInfoFragment2" />
+            app:destination="@id/eventInfoFragment2"
+            />
     </fragment>
     <fragment
         android:id="@+id/eventInfoFragment2"

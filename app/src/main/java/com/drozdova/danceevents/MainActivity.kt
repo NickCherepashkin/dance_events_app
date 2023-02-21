@@ -21,15 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-        binding.btmNavigation.setupWithNavController(navController)
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.calendar, R.id.events,  R.id.search, R.id.favorites)
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        NavigationUI.setupWithNavController(binding.btmNavigation, navController, false)
     }
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        return navController.navigateUp(appBarConfiguration)
-//    }
 }

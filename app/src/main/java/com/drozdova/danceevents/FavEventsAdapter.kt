@@ -1,28 +1,34 @@
 package com.drozdova.danceevents
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
+import com.drozdova.danceevents.databinding.ItemEventVerBinding
+import com.drozdova.danceevents.model.EventModel
 
-class FavEventsAdapter : RecyclerView.Adapter<FavEventsHolder>() {
+class FavEventsAdapter(
+    private val eventListener: EventListener
+) : RecyclerView.Adapter<FavEventsHolder>() {
     private var _binding: ItemEventHorBinding? = null
     private val binding get() = _binding!!
 
-    private var listFavEvents = listOf<String>()
+    private var listFavEvents = listOf<EventModel>()
 
-    fun submit(listFavEvents: List<String>) {
+    fun submit(listFavEvents: List<EventModel>) {
         this.listFavEvents = listFavEvents
     }
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavEventsHolder {
-        TODO("Not yet implemented")
+        _binding = ItemEventHorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FavEventsHolder(binding, eventListener)
     }
 
     override fun onBindViewHolder(holder: FavEventsHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(listFavEvents[position])
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return listFavEvents.size
     }
 }

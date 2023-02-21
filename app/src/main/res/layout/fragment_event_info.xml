@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventInfoFragment"
-    android:orientation="vertical">
+    tools:context=".EventInfoFragment">
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvi_event_title"
@@ -116,8 +116,7 @@
             android:textSize="16sp"
             android:layout_margin="15dp"/>
 
+    </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
 
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

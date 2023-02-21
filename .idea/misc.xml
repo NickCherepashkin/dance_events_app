@@ -4,7 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
         <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/fragment_event_info.xml" value="0.1" />
+        <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/fragment_events_list.xml" value="0.24427083333333333" />
+        <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/fragment_favorite_events.xml" value="0.24427083333333333" />
+        <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/fragment_month_with_events.xml" value="0.24427083333333333" />
+        <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/fragment_search.xml" value="0.15677083333333333" />
+        <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/item_event_hor.xml" value="0.24427083333333333" />
+        <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/item_event_ver.xml" value="0.24427083333333333" />
         <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/month_item.xml" value="0.4" />
         <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/menu/bottom_nav_menu.xml" value="0.24427083333333333" />
       </map>
