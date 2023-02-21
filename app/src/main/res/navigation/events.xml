@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/eventsListFragment"
-        android:name="com.drozdova.danceevents.EventsListFragment"
+        android:name="com.drozdova.danceevents.presentation.EventsListFragment"
         android:label="fragment_events_list"
         tools:layout="@layout/fragment_events_list">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventInfoFragment2"
-        android:name="com.drozdova.danceevents.EventInfoFragment"
+        android:name="com.drozdova.danceevents.presentation.EventInfoFragment"
         android:label="fragment_event_info"
         tools:layout="@layout/fragment_event_info" />
 </navigation>

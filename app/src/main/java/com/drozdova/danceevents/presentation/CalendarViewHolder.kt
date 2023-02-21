@@ -1,6 +1,7 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.YearItemBinding
 
 class CalendarViewHolder(

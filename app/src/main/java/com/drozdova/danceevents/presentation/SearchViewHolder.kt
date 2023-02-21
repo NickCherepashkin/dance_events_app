@@ -1,13 +1,13 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
-import com.drozdova.danceevents.model.EventModel
+import com.drozdova.danceevents.presentation.model.EventModel
 
-class FavEventsHolder(
+class SearchViewHolder(
     private val view: ItemEventHorBinding,
     private val eventListener: EventListener
-) : ViewHolder(view.root) {
+) : ViewHolder(view.root){
 
     fun bind(event: EventModel) {
         view.eventTitle.text = event.title

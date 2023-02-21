@@ -1,4 +1,4 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation
 
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod

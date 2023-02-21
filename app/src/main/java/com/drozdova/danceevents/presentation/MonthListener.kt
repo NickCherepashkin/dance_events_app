@@ -1,4 +1,4 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation
 
 interface MonthListener {
     fun showMonthWithEvents()
