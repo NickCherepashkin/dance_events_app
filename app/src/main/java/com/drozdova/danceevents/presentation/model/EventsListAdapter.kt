@@ -1,10 +1,10 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation.model
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.ItemEventVerBinding
-import com.drozdova.danceevents.model.EventModel
+import com.drozdova.danceevents.presentation.model.model.EventModel
 
 class EventsListAdapter(
     private val eventListener: EventListener

@@ -1,4 +1,4 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation.model
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.drozdova.danceevents.databinding.MonthItemBinding

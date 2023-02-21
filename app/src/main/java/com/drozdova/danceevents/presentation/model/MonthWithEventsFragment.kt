@@ -1,4 +1,4 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation.model
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.FragmentMonthWithEventsBinding
-import com.drozdova.danceevents.model.EventModel
+import com.drozdova.danceevents.presentation.model.model.EventModel
 import java.util.*
 
 class MonthWithEventsFragment : Fragment(), EventListener {

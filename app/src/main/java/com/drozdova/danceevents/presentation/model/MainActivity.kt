@@ -1,10 +1,11 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation.model
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

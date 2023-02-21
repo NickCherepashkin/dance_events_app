@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="3dp"
-    tools:context=".MonthWithEventsFragment">
+    tools:context=".presentation.model.MonthWithEventsFragment">
 
     <CalendarView
         android:id="@+id/cv_month"

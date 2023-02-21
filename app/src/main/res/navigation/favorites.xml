@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/favEventsFragment"
-        android:name="com.drozdova.danceevents.FavEventsFragment"
+        android:name="com.drozdova.danceevents.presentation.model.FavEventsFragment"
         android:label="fragment_favorite_events"
         tools:layout="@layout/fragment_fav_events" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventInfoFragment3"
-        android:name="com.drozdova.danceevents.EventInfoFragment"
+        android:name="com.drozdova.danceevents.presentation.model.EventInfoFragment"
         android:label="fragment_event_info"
         tools:layout="@layout/fragment_event_info" />
 </navigation>

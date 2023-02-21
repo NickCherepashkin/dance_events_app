@@ -1,4 +1,4 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation.model
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions

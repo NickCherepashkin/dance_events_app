@@ -1,4 +1,4 @@
-package com.drozdova.danceevents.model
+package com.drozdova.danceevents.presentation.model.model
 
 data class EventModel (
         val title: String,

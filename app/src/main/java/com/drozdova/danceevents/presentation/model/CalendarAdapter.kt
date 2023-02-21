@@ -1,4 +1,4 @@
-package com.drozdova.danceevents
+package com.drozdova.danceevents.presentation.model
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
