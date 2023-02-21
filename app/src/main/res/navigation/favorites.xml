@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/favorites"
+    app:startDestination="@id/favEventsFragment">
+
+    <fragment
+        android:id="@+id/favEventsFragment"
+        android:name="com.drozdova.danceevents.FavEventsFragment"
+        android:label="fragment_favorite_events"
+        tools:layout="@layout/fragment_fav_events" >
+        <action
+            android:id="@+id/action_favEventsFragment_to_eventInfoFragment3"
+            app:destination="@id/eventInfoFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventInfoFragment3"
+        android:name="com.drozdova.danceevents.EventInfoFragment"
+        android:label="fragment_event_info"
+        tools:layout="@layout/fragment_event_info" />
+</navigation>

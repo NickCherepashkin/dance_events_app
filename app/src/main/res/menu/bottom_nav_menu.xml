@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/calendarFragment"
+        android:id="@+id/calendar"
         android:title="@string/menu_calendar"
-        android:icon="@drawable/ic_calendar" />
+        android:icon="@drawable/ic_calendar"
+        android:contentDescription="@string/cd_calendar"/>
 
     <item
-        android:id="@+id/eventsListFragment"
+        android:id="@+id/events"
         android:title="@string/menu_events"
-        android:icon="@drawable/ic_events" />
+        android:icon="@drawable/ic_events"
+        android:contentDescription="@string/cd_events"/>
 
     <item
-        android:id="@+id/searchFragment"
+        android:id="@+id/search"
         android:title="@string/menu_search"
-        android:icon="@drawable/ic_search" />
+        android:icon="@drawable/ic_search"
+        android:contentDescription="@string/cd_search"/>
 
     <item
-        android:id="@+id/favoriteEventsFragment"
+        android:id="@+id/favorites"
         android:title="@string/menu_favorites"
-        android:icon="@drawable/ic_favorite_events" />
+        android:icon="@drawable/ic_favorite_events"
+        android:contentDescription="@string/cd_favorite"/>
 </menu>

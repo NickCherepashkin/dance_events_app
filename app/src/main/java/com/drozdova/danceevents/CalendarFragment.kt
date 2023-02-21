@@ -5,9 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.drozdova.danceevents.databinding.FragmentCalendarBinding
 
-class CalendarFragment : Fragment() {
+class CalendarFragment : Fragment(), MonthListener {
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
 
@@ -24,7 +29,7 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = CalendarAdapter()
+        adapter = CalendarAdapter(this)
         binding.rvCalendar.adapter = adapter
         val listOfYears = listOf(2023, 2024)
         adapter.submit(listOfYears)
@@ -33,5 +38,9 @@ class CalendarFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun showMonthWithEvents() {
+        findNavController().navigate(R.id.action_calendarFragment_to_monthWithEventsFragment)
     }
 }

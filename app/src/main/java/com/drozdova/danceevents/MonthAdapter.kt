@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.MonthItemBinding
 import java.util.*
 
-class MonthAdapter : RecyclerView.Adapter<MonthViewHolder>() {
+class MonthAdapter(
+    private val monthListener: MonthListener
+) : RecyclerView.Adapter<MonthViewHolder>() {
     private var _binding: MonthItemBinding? = null
     private val binding get() = _binding!!
 
@@ -20,7 +22,7 @@ class MonthAdapter : RecyclerView.Adapter<MonthViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonthViewHolder {
         _binding = MonthItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MonthViewHolder(binding)
+        return MonthViewHolder(binding, monthListener)
     }
 
     override fun onBindViewHolder(holder: MonthViewHolder, position: Int) {
