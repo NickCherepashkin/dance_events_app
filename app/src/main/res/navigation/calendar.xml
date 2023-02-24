@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.drozdova.danceevents.presentation.CalendarFragment"
+        android:name="com.drozdova.danceevents.presentation.view.calendar.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" >
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/monthWithEventsFragment"
-        android:name="com.drozdova.danceevents.presentation.MonthWithEventsFragment"
+        android:name="com.drozdova.danceevents.presentation.view.events.MonthWithEventsFragment"
         android:label="fragment_month_with_events"
         tools:layout="@layout/fragment_month_with_events" >
         <action
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/eventInfoFragment"
-        android:name="com.drozdova.danceevents.presentation.EventInfoFragment"
+        android:name="com.drozdova.danceevents.presentation.view.eventinfo.EventInfoFragment"
         android:label="fragment_event_info"
         tools:layout="@layout/fragment_event_info" />
 </navigation>

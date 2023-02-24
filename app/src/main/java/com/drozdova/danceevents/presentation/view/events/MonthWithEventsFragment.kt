@@ -1,4 +1,4 @@
-package com.drozdova.danceevents.presentation
+package com.drozdova.danceevents.presentation.view.events
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import com.drozdova.danceevents.R
 import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.databinding.FragmentMonthWithEventsBinding
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
+import com.drozdova.danceevents.presentation.model.EventModel
+import com.drozdova.danceevents.presentation.view.listener.EventListener
 import java.util.*
 
 class MonthWithEventsFragment : Fragment(), EventListener {
@@ -53,7 +55,7 @@ class MonthWithEventsFragment : Fragment(), EventListener {
         _binding = null
     }
 
-    override fun showDetails() {
+    override fun showDetails(event: EventModel) {
         findNavController().navigate(R.id.action_monthWithEventsFragment_to_eventInfoFragment)
     }
 }

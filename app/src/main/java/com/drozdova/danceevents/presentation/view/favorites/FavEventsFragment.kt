@@ -1,4 +1,4 @@
-package com.drozdova.danceevents.presentation
+package com.drozdova.danceevents.presentation.view.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,21 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.drozdova.danceevents.R
 import com.drozdova.danceevents.data.EventsRepoImpl
-import com.drozdova.danceevents.databinding.FragmentEventsListBinding
+import com.drozdova.danceevents.databinding.FragmentFavEventsBinding
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
+import com.drozdova.danceevents.presentation.model.EventModel
+import com.drozdova.danceevents.presentation.view.listener.EventListener
 
-class EventsListFragment : Fragment(), EventListener {
-    private var _binding: FragmentEventsListBinding? = null
+class FavEventsFragment : Fragment(), EventListener {
+    private var _binding: FragmentFavEventsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: EventsListAdapter
-    private lateinit var interactor : EventsInteractor
+    private lateinit var adapter: FavEventsAdapter
+    private lateinit var interactor: EventsInteractor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEventsListBinding.inflate(inflater, container, false)
+        _binding = FragmentFavEventsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -31,9 +33,10 @@ class EventsListFragment : Fragment(), EventListener {
 
         interactor = EventsInteractor(EventsRepoImpl())
 
-        adapter = EventsListAdapter(this)
-        binding.rvEventsList.adapter = adapter
-        val list = interactor.getEventsList()
+        adapter = FavEventsAdapter(this)
+        binding.rvFavorite.adapter = adapter
+
+        val list = interactor.getFavEventsList()
 
         adapter.submit(list)
     }
@@ -43,7 +46,7 @@ class EventsListFragment : Fragment(), EventListener {
         _binding = null
     }
 
-    override fun showDetails() {
-        findNavController().navigate(R.id.action_eventsListFragment_to_eventInfoFragment2)
+    override fun showDetails(event: EventModel) {
+        findNavController().navigate(R.id.action_favEventsFragment_to_eventInfoFragment3)
     }
 }

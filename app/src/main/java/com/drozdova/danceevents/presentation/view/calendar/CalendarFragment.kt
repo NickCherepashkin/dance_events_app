@@ -1,4 +1,4 @@
-package com.drozdova.danceevents.presentation
+package com.drozdova.danceevents.presentation.view.calendar
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.FragmentCalendarBinding
+import com.drozdova.danceevents.presentation.view.listener.MonthListener
 
 class CalendarFragment : Fragment(), MonthListener {
     private var _binding: FragmentCalendarBinding? = null

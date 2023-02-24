@@ -1,7 +1,8 @@
-package com.drozdova.danceevents.presentation
+package com.drozdova.danceevents.presentation.view.events
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.drozdova.danceevents.databinding.ItemEventVerBinding
+import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
 
 class EventsListViewHolder(
@@ -15,7 +16,7 @@ class EventsListViewHolder(
         view.eventDateEnd.text = event.dateEnd
 
         itemView.setOnClickListener {
-            eventListener.showDetails()
+            eventListener.showDetails(event)
         }
     }
 }

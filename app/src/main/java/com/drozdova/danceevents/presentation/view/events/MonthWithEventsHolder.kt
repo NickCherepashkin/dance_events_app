@@ -1,7 +1,8 @@
-package com.drozdova.danceevents.presentation
+package com.drozdova.danceevents.presentation.view.events
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
+import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
 
 class MonthWithEventsHolder(
@@ -13,7 +14,7 @@ class MonthWithEventsHolder(
         view.eventDateStart.text = "${event.dateStart} - ${event.dateEnd}"
 
         itemView.setOnClickListener {
-            eventListener.showDetails()
+            eventListener.showDetails(event)
         }
     }
 }

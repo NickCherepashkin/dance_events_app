@@ -1,9 +1,10 @@
-package com.drozdova.danceevents.presentation
+package com.drozdova.danceevents.presentation.view.events
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
+import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
 
 class MonthWithEventsAdapter(
