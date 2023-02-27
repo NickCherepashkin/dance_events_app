@@ -7,12 +7,13 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="3dp"
-    tools:context=".presentation.MonthWithEventsFragment">
+    tools:context=".presentation.view.events.MonthWithEventsFragment">
 
     <CalendarView
         android:id="@+id/cv_month"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:firstDayOfWeek="2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_events_in_month"

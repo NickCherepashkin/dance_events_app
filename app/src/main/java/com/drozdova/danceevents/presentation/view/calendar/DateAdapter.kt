@@ -1,9 +1,10 @@
-package com.drozdova.danceevents.presentation
+package com.drozdova.danceevents.presentation.view.calendar
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.DateItemBinding
+import com.drozdova.danceevents.presentation.view.listener.MonthListener
 
 class DateAdapter(
     private val monthListener: MonthListener
@@ -11,13 +12,15 @@ class DateAdapter(
     private var _binding: DateItemBinding? = null
     private val binding get() = _binding!!
 
-    private var days: Int = 0
     private var year: Int = 0
+    private var month: Int = 0
+    private var days: Int = 0
     private var spaces: Int = 0
 
-    fun submit(days: Int, year: Int, spaces: Int) {
-        this.days = days
+    fun submit(year: Int, month: Int, days: Int, spaces: Int) {
         this.year = year
+        this.month = month
+        this.days = days
         this.spaces = spaces
     }
 
@@ -27,7 +30,7 @@ class DateAdapter(
     }
 
     override fun onBindViewHolder(holder: DateViewHolder, position: Int) {
-        holder.bind(days, position, year, spaces)
+        holder.bind(year, month, spaces, position)
     }
 
     override fun getItemCount(): Int {

@@ -6,46 +6,46 @@ import com.drozdova.danceevents.presentation.model.EventModel
 class EventsRepoImpl : EventsRepo {
     override fun getEventsList(): List<EventModel> {
         return listOf(
-            EventModel("Winter Cup 2023", "25.02.2023", "26.02.2023"),
-            EventModel("Child and Youth Week", "25.02.2023", "26.02.2023"),
-            EventModel("Minsk Cup", "25.02.2023", "26.02.2023"),
-            EventModel("All2TheStep", "25.02.2023", "26.02.2023"),
-            EventModel("GolJun", "25.02.2023", "26.02.2023"),
-            EventModel("Christmas Stars", "25.02.2023", "26.02.2023"),
-            EventModel("Mooving Up", "25.02.2023", "26.02.2023"),
-            EventModel("Child and Youth Week", "25.02.2023", "26.02.2023"),
-            EventModel("Minsk Cup", "25.02.2023", "26.02.2023"),
-            EventModel("All2TheStep", "25.02.2023", "26.02.2023"),
-            EventModel("GolJun", "25.02.2023", "26.02.2023")
+            EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(2,"Child and Youth Week", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(3,"Minsk Cup", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(4,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(5,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(6,"Christmas Stars", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(7,"Mooving Up", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(8,"Child and Youth Week", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(9,"Minsk Cup", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
         )
     }
 
     override fun getFavEventsList(): List<EventModel> {
         return listOf(
-            EventModel("Winter Cup 2023", "25.02.2023", "26.02.2023"),
-            EventModel("Child and Youth Week", "25.02.2023", "26.02.2023"),
-            EventModel("Minsk Cup", "25.02.2023", "26.02.2023"),
-            EventModel("All2TheStep", "25.02.2023", "26.02.2023"),
-            EventModel("GolJun", "25.02.2023", "26.02.2023")
+            EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(2,"Child and Youth Week", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(3,"Minsk Cup", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(4,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
         )
     }
 
     override fun getEventsInMonth(date: String): List<EventModel> {
         return listOf(
-            EventModel("Winter Cup 2023", "25.02.2023", "26.02.2023"),
-            EventModel("Child and Youth Week", "25.02.2023", "26.02.2023"),
-            EventModel("Minsk Cup", "25.02.2023", "26.02.2023"),
-            EventModel("All2TheStep", "25.02.2023", "26.02.2023"),
-            EventModel("GolJun", "25.02.2023", "26.02.2023"),
-            EventModel("Winter Cup 2023", "25.02.2023", "26.02.2023")
+            EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(4,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
         )
     }
 
     override fun searchEvents(title: String): List<EventModel> {
         return listOf(
-            EventModel("Minsk Cup", "25.02.2023", "26.02.2023"),
-            EventModel("All2TheStep", "25.02.2023", "26.02.2023"),
-            EventModel("GolJun", "25.02.2023", "26.02.2023")
+            EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(9,"Minsk Cup", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
+            EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
         )
     }
 }

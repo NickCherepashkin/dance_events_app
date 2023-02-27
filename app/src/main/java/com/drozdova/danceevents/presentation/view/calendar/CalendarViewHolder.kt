@@ -1,8 +1,9 @@
-package com.drozdova.danceevents.presentation
+package com.drozdova.danceevents.presentation.view.calendar
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.YearItemBinding
+import com.drozdova.danceevents.presentation.view.listener.MonthListener
 
 class CalendarViewHolder(
     private val view: YearItemBinding,
@@ -16,6 +17,8 @@ class CalendarViewHolder(
         view.rvYear.isNestedScrollingEnabled = true
         val monthAdapter = MonthAdapter(monthListener)
         view.rvYear.adapter = monthAdapter
+
+        // закидываем список месяцев в ресайклер и год для календарьвью
         val listOfMonths = view.root.resources.getStringArray(R.array.month_array).toList()
         monthAdapter.submit(year, listOfMonths)
     }
