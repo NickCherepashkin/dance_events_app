@@ -1,18 +1,15 @@
 package com.drozdova.danceevents.presentation.view.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.drozdova.danceevents.R
-import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.databinding.FragmentSearchBinding
-import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventModel
-import com.drozdova.danceevents.presentation.view.eventinfo.EventInfoFragment
 import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.viewmodel.SearchViewModel
 import com.drozdova.danceevents.utils.BundleConstants

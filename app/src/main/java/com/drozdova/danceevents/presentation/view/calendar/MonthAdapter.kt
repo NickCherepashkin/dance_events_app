@@ -27,11 +27,16 @@ class MonthAdapter(
     }
 
     override fun onBindViewHolder(holder: MonthViewHolder, position: Int) {
-        
-        val days = when(position) {
+
+        var days = when(position) {
             1 -> 28
             0, 2, 4, 6, 7, 9, 11 -> 31
             else -> 30
+        }
+
+        // check for leap year
+        if  ((((year % 4 == 0) && (year % 100 != 0)) ||  (year % 400 == 0)) && position == 1){
+            days = 29;
         }
 
         val calendar = Calendar.getInstance()
@@ -39,7 +44,7 @@ class MonthAdapter(
         val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
         val spaces = dayOfWeek - 1
 
-        holder.bind(listOfMonths[position], days, year, spaces)
+        holder.bind(year, listOfMonths[position], position, days,  spaces)
     }
 
     override fun getItemCount(): Int {

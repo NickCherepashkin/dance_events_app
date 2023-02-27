@@ -12,7 +12,8 @@
     <CalendarView
         android:id="@+id/cv_month"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:firstDayOfWeek="2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_events_in_month"
