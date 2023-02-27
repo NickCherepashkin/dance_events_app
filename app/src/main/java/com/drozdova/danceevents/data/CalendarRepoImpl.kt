@@ -5,7 +5,7 @@ import com.drozdova.danceevents.presentation.model.EventModel
 import java.util.*
 
 class CalendarRepoImpl: CalendarRepo {
-    override fun getListOgYears() : List<Int>{
+    override fun getListOfYears() : List<Int>{
         val calendar: Calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         return listOf(year, (year + 1))

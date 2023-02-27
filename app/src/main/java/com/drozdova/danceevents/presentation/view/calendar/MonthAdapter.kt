@@ -36,7 +36,7 @@ class MonthAdapter(
 
         // check for leap year
         if  ((((year % 4 == 0) && (year % 100 != 0)) ||  (year % 400 == 0)) && position == 1){
-            days = 29;
+            days = 29
         }
 
         val calendar = Calendar.getInstance()

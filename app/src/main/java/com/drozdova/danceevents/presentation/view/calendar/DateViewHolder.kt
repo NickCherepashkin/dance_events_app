@@ -14,10 +14,10 @@ class DateViewHolder(
         val value: Int
         if(pos == spaces){
             value = 1
-            view.tvDate.text = "${value}"
+            view.tvDate.text = "$value"
         } else if (pos > spaces) {
             value = 1 + (pos - spaces)
-            view.tvDate.text = "${value}"
+            view.tvDate.text = "$value"
         } else {
             view.tvDate.text = ""
         }

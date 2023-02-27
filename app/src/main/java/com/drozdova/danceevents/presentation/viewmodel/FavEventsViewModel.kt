@@ -7,25 +7,25 @@ import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventModel
 
-class SearchViewModel : ViewModel() {
+class FavEventsViewModel : ViewModel() {
     private val interactor = EventsInteractor(EventsRepoImpl())
 
-    private val _searchList = MutableLiveData<List<EventModel>>()
-    val searchList : LiveData<List<EventModel>> = _searchList
+    private val _favEventsList = MutableLiveData<List<EventModel>>()
+    val favEventsList : LiveData<List<EventModel>> = _favEventsList
 
     private val _bundle = MutableLiveData<EventModel?>()
     val bundle: LiveData<EventModel?> = _bundle
 
-    fun searchEventsList(title: String) {
-        _searchList.value = interactor.searchEvents(title)
+    fun showFavEventsList() {
+        _favEventsList.value = interactor.getFavEventsList()
     }
 
-    fun showEventInfo(event: EventModel) {
+    fun showFavEventInfo(event: EventModel) {
         _bundle.value = event
     }
 
     fun onBack(){
         _bundle.value = null
-        _searchList.apply { null }
+        _favEventsList.apply { null }
     }
 }
