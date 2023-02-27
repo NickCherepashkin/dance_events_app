@@ -5,20 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.drozdova.danceevents.R
-import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.databinding.FragmentEventsListBinding
-import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventModel
 import com.drozdova.danceevents.presentation.view.listener.EventListener
+import com.drozdova.danceevents.presentation.viewmodel.EventsViewModel
+import com.drozdova.danceevents.utils.BundleConstants
 
 class EventsListFragment : Fragment(), EventListener {
     private var _binding: FragmentEventsListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: EventsListAdapter
-    private lateinit var interactor : EventsInteractor
+
+    private val viewModel: EventsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,21 +33,35 @@ class EventsListFragment : Fragment(), EventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        interactor = EventsInteractor(EventsRepoImpl())
-
         adapter = EventsListAdapter(this)
         binding.rvEventsList.adapter = adapter
-        val list = interactor.getEventsList()
 
-        adapter.submit(list)
+        viewModel.showEventsList()
+
+        viewModel.eventsList.observe(viewLifecycleOwner){ list ->
+            adapter.submit(list)
+        }
+
+        viewModel.bundle.observe(viewLifecycleOwner){ event ->
+            if(event != null) {
+                val bundle = Bundle()
+                bundle.putString(BundleConstants.EVENT_TITLE, event.title)
+                bundle.putString(BundleConstants.EVENT_DATE_START, event.dateStart)
+                bundle.putString(BundleConstants.EVENT_DATE_END, event.dateEnd)
+                bundle.putString(BundleConstants.EVENT_DESCRIPTION, event.description)
+
+                findNavController().navigate(R.id.action_eventsListFragment_to_eventInfoFragment2, bundle)
+                viewModel.onBack()
+            }
+        }
+    }
+
+    override fun showDetails(event: EventModel) {
+        viewModel.showEventInfo(event)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    override fun showDetails(event: EventModel) {
-        findNavController().navigate(R.id.action_eventsListFragment_to_eventInfoFragment2)
     }
 }

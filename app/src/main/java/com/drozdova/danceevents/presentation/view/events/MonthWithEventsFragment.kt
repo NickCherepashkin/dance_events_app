@@ -59,13 +59,13 @@ class MonthWithEventsFragment : Fragment(), EventListener {
 
         viewModel.bundle.observe(viewLifecycleOwner){ event ->
             if (event != null) {
-                val bundleEvent = Bundle()
-                bundleEvent.putString(BundleConstants.EVENT_TITLE, event.title)
-                bundleEvent.putString(BundleConstants.EVENT_DATE_START, event.dateStart)
-                bundleEvent.putString(BundleConstants.EVENT_DATE_END, event.dateEnd)
-                bundleEvent.putString(BundleConstants.EVENT_DESCRIPTION, event.description)
+                val bundle = Bundle()
+                bundle.putString(BundleConstants.EVENT_TITLE, event.title)
+                bundle.putString(BundleConstants.EVENT_DATE_START, event.dateStart)
+                bundle.putString(BundleConstants.EVENT_DATE_END, event.dateEnd)
+                bundle.putString(BundleConstants.EVENT_DESCRIPTION, event.description)
 
-                findNavController().navigate(R.id.action_monthWithEventsFragment_to_eventInfoFragment)
+                findNavController().navigate(R.id.action_monthWithEventsFragment_to_eventInfoFragment, bundle)
                 viewModel.onBack()
             }
         }
