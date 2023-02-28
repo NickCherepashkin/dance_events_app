@@ -2,8 +2,9 @@ package com.drozdova.danceevents.domain.interactor
 
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import com.drozdova.danceevents.presentation.model.EventModel
+import javax.inject.Inject
 
-class EventsInteractor(
+class EventsInteractor @Inject constructor(
     private val eventsListRepo: EventsRepo
 ) {
     fun getEventsList() : List<EventModel> {

@@ -2,8 +2,9 @@ package com.drozdova.danceevents.data
 
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import com.drozdova.danceevents.presentation.model.EventModel
+import javax.inject.Inject
 
-class EventsRepoImpl : EventsRepo {
+class EventsRepoImpl @Inject constructor() : EventsRepo {
     override fun getEventsList(): List<EventModel> {
         return listOf(
             EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),

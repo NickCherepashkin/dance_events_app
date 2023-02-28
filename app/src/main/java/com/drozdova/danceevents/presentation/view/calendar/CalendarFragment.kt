@@ -12,7 +12,9 @@ import com.drozdova.danceevents.databinding.FragmentCalendarBinding
 import com.drozdova.danceevents.presentation.view.listener.MonthListener
 import com.drozdova.danceevents.presentation.viewmodel.CalendarViewModel
 import com.drozdova.danceevents.utils.BundleConstants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CalendarFragment : Fragment(), MonthListener {
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!

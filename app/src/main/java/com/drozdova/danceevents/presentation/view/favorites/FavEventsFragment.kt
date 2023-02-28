@@ -13,7 +13,9 @@ import com.drozdova.danceevents.presentation.model.EventModel
 import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.viewmodel.FavEventsViewModel
 import com.drozdova.danceevents.utils.BundleConstants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavEventsFragment : Fragment(), EventListener {
     private var _binding: FragmentFavEventsBinding? = null
     private val binding get() = _binding!!

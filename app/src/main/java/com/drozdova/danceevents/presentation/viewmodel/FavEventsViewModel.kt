@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FavEventsViewModel : ViewModel() {
-    private val interactor = EventsInteractor(EventsRepoImpl())
+@HiltViewModel
+class FavEventsViewModel @Inject constructor(
+    private val interactor: EventsInteractor
+) : ViewModel() {
 
     private val _favEventsList = MutableLiveData<List<EventModel>>()
     val favEventsList : LiveData<List<EventModel>> = _favEventsList

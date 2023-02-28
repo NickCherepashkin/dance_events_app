@@ -13,7 +13,10 @@ import com.drozdova.danceevents.presentation.model.EventModel
 import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.viewmodel.EventsViewModel
 import com.drozdova.danceevents.utils.BundleConstants
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class EventsListFragment : Fragment(), EventListener {
     private var _binding: FragmentEventsListBinding? = null
     private val binding get() = _binding!!
