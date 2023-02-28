@@ -13,10 +13,12 @@ class EventsListAdapter(
     private var _binding: ItemEventVerBinding? = null
     private val binding get() = _binding!!
 
-    private var listOfEvents = listOf<EventModel>()
+    private var listOfEvents = mutableListOf<EventModel>()
 
     fun submit(listOfEvents: List<EventModel>) {
-        this.listOfEvents = listOfEvents
+        this.listOfEvents.clear()
+        this.listOfEvents.addAll(listOfEvents.toMutableList())
+        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsListViewHolder {

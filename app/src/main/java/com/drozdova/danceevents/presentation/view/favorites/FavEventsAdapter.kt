@@ -13,10 +13,12 @@ class FavEventsAdapter(
     private var _binding: ItemEventHorBinding? = null
     private val binding get() = _binding!!
 
-    private var listFavEvents = listOf<EventModel>()
+    private var listFavEvents = mutableListOf<EventModel>()
 
     fun submit(listFavEvents: List<EventModel>) {
-        this.listFavEvents = listFavEvents
+        this.listFavEvents.clear()
+        this.listFavEvents.addAll(listFavEvents.toMutableList())
+        this.notifyDataSetChanged()
     }
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavEventsHolder {

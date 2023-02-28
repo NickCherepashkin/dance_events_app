@@ -13,10 +13,12 @@ class SearchAdapter(
     private var _binding: ItemEventHorBinding? = null
     private val binding get() = _binding!!
 
-    private var listSearchEvents = listOf<EventModel>()
+    private var listSearchEvents = mutableListOf<EventModel>()
 
     fun submit(listSearchEvents: List<EventModel>) {
-        this.listSearchEvents = listSearchEvents
+        this.listSearchEvents.clear()
+        this.listSearchEvents.addAll(listSearchEvents.toMutableList())
+        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
