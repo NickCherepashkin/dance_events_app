@@ -3,10 +3,12 @@ package com.drozdova.danceevents.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,7 +23,10 @@ class MonthWithEventsViewModel @Inject constructor(
     val bundle: LiveData<EventModel?> = _bundle
 
     fun showEventsInMonth(date: String) {
-        _eventsListInMonth.value = interactor.getEventsInMonth(date)
+        viewModelScope.launch {
+            _eventsListInMonth.value = interactor.getEventsInMonth(date)
+        }
+
     }
 
     fun showEventInfo(event: EventModel) {

@@ -13,10 +13,12 @@ class MonthWithEventsAdapter(
     private var _binding: ItemEventHorBinding? = null
     private val binding get() = _binding!!
 
-    private var eventsInMonthList = listOf<EventModel>()
+    private var eventsInMonthList = mutableListOf<EventModel>()
 
     fun submit(eventsInMonthList: List<EventModel>) {
-        this.eventsInMonthList = eventsInMonthList
+        this.eventsInMonthList.clear()
+        this.eventsInMonthList.addAll(eventsInMonthList.toMutableList())
+        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonthWithEventsHolder {
