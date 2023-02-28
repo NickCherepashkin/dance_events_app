@@ -13,7 +13,9 @@ import com.drozdova.danceevents.presentation.model.EventModel
 import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.viewmodel.SearchViewModel
 import com.drozdova.danceevents.utils.BundleConstants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment(), EventListener {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!

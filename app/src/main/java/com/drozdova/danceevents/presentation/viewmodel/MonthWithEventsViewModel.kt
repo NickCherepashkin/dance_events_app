@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MonthWithEventsViewModel : ViewModel() {
-    private val interactor = EventsInteractor(EventsRepoImpl())
+@HiltViewModel
+class MonthWithEventsViewModel @Inject constructor(
+    private val interactor: EventsInteractor
+) : ViewModel() {
 
     private val _eventsListInMonth = MutableLiveData<List<EventModel>>()
     val eventsListInMonth : LiveData<List<EventModel>> = _eventsListInMonth

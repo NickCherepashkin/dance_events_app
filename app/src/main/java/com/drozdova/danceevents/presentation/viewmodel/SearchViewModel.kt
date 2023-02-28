@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.drozdova.danceevents.data.EventsRepoImpl
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
-    private val interactor = EventsInteractor(EventsRepoImpl())
+@HiltViewModel
+class SearchViewModel @Inject constructor(
+    private val interactor: EventsInteractor
+) : ViewModel() {
 
     private val _searchList = MutableLiveData<List<EventModel>>()
     val searchList : LiveData<List<EventModel>> = _searchList
