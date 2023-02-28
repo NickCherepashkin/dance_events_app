@@ -7,19 +7,19 @@ import javax.inject.Inject
 class EventsInteractor @Inject constructor(
     private val eventsListRepo: EventsRepo
 ) {
-    fun getEventsList() : List<EventModel> {
+    suspend fun getEventsList() : List<EventModel> {
         return eventsListRepo.getEventsList()
     }
 
-    fun getFavEventsList() : List<EventModel> {
+    suspend fun getFavEventsList() : List<EventModel> {
         return eventsListRepo.getFavEventsList()
     }
 
-    fun getEventsInMonth(date: String) : List<EventModel> {
+    suspend fun getEventsInMonth(date: String) : List<EventModel> {
         return eventsListRepo.getEventsInMonth(date)
     }
 
-    fun searchEvents(title: String) : List<EventModel> {
+    suspend fun searchEvents(title: String) : List<EventModel> {
         return eventsListRepo.searchEvents(title)
     }
 }
