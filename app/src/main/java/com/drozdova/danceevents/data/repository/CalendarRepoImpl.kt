@@ -1,4 +1,4 @@
-package com.drozdova.danceevents.data
+package com.drozdova.danceevents.data.repository
 
 import com.drozdova.danceevents.domain.repository.CalendarRepo
 import com.drozdova.danceevents.presentation.model.EventModel
