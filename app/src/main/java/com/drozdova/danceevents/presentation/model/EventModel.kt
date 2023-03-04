@@ -6,5 +6,7 @@ data class EventModel (
         val dateStart: String,
         val dateEnd: String,
         val description: String,
-        val eventType: String
+        val location: String,
+        val contacts: String,
+        val photo: String
 )

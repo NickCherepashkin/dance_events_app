@@ -1,5 +1,6 @@
 package com.drozdova.danceevents.presentation.view.eventinfo
 
+import android.net.Uri
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drozdova.danceevents.databinding.FragmentEventInfoBinding
 import com.drozdova.danceevents.utils.BundleConstants
+import com.squareup.picasso.Picasso
 
 class EventInfoFragment : Fragment() {
     private var _binding: FragmentEventInfoBinding? = null
@@ -28,11 +30,17 @@ class EventInfoFragment : Fragment() {
         bundle?.let { safeBundle ->
             val title = safeBundle.getString(BundleConstants.EVENT_TITLE)
             val date = "${safeBundle.getString(BundleConstants.EVENT_DATE_START)} - ${safeBundle.getString(BundleConstants.EVENT_DATE_END)}"
+            val location = safeBundle.getString(BundleConstants.EVENT_LOCATION)
+            val contacts = safeBundle.getString(BundleConstants.EVENT_CONTACTS)
             val description = safeBundle.getString(BundleConstants.EVENT_DESCRIPTION)
+            val photo = safeBundle.getString(BundleConstants.EVENT_PHOTO)
 
             binding.tviEventTitle.text = title
             binding.tviEventDate.text = date
+            binding.tviEventLocation.text = location
+            binding.tviEventOrgContacts.text = contacts
             binding.tviEventDescription.text = description
+            Picasso.get().load(Uri.parse(photo)).into(binding.imviEventImage)
         }
 
         binding.tviEventDescription.movementMethod = ScrollingMovementMethod()
