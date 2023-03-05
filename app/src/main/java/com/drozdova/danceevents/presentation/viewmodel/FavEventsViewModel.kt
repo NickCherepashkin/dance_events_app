@@ -23,7 +23,8 @@ class FavEventsViewModel @Inject constructor(
 
     fun showFavEventsList() {
         viewModelScope.launch {
-            _favEventsList.value = interactor.getFavEventsList()
+            interactor.getFavEventsList()
+            _favEventsList.value = interactor.showFavEventsList()
         }
     }
 

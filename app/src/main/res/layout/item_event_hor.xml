@@ -17,9 +17,7 @@
             android:id="@+id/imv_event_hor"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            tools:ignore="ImageContrastCheck"
-            android:background="@color/black"
-            android:src="@drawable/ic_events"/>
+            tools:ignore="ImageContrastCheck"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,18 +30,15 @@
                 android:id="@+id/event_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginBottom="10dp"
-                android:text="xzczxcxz"/>
+                android:layout_marginBottom="10dp"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/event_date_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
-                android:textSize="12sp"
-                android:text="mvkl;dfmvd"/>
+                android:textSize="12sp"/>
 
         </LinearLayout>
 

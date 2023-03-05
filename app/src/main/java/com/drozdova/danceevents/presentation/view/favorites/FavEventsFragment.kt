@@ -50,6 +50,9 @@ class FavEventsFragment : Fragment(), EventListener {
                 bundle.putString(BundleConstants.EVENT_TITLE, event.title)
                 bundle.putString(BundleConstants.EVENT_DATE_START, event.dateStart)
                 bundle.putString(BundleConstants.EVENT_DATE_END, event.dateEnd)
+                bundle.putString(BundleConstants.EVENT_LOCATION, event.location)
+                bundle.putString(BundleConstants.EVENT_CONTACTS, event.contacts)
+                bundle.putString(BundleConstants.EVENT_PHOTO, event.photo)
                 bundle.putString(BundleConstants.EVENT_DESCRIPTION, event.description)
 
                 findNavController().navigate(R.id.action_favEventsFragment_to_eventInfoFragment3, bundle)

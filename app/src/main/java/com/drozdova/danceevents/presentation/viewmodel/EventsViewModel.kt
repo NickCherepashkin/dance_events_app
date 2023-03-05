@@ -24,7 +24,8 @@ class EventsViewModel @Inject constructor(
 
     fun showEventsList() {
         viewModelScope.launch {
-            _eventsList.value = interactor.getEventsList()
+            interactor.getEventsList()
+            _eventsList.value = interactor.showEventsList()
         }
 
     }

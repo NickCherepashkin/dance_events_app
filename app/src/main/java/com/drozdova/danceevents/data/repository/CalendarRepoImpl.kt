@@ -7,8 +7,6 @@ import javax.inject.Inject
 
 class CalendarRepoImpl @Inject constructor(): CalendarRepo {
     override fun getListOfYears() : List<Int>{
-        val calendar: Calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        return listOf(year, (year + 1))
+        return emptyList()
     }
 }
