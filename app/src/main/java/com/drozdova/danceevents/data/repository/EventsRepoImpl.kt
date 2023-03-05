@@ -5,8 +5,7 @@ import com.drozdova.danceevents.data.database.bean.EventEntity
 import com.drozdova.danceevents.data.database.bean.FavEntity
 import com.drozdova.danceevents.data.database.dao.EventsDAO
 import com.drozdova.danceevents.data.database.dao.FavesDAO
-import com.drozdova.danceevents.data.model.Event
-import com.drozdova.danceevents.data.model.EventsResponse
+import com.drozdova.danceevents.data.model.Fav
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import com.drozdova.danceevents.presentation.model.EventModel
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +53,8 @@ class EventsRepoImpl @Inject constructor(
                     entity.description,
                     entity.location,
                     entity.contacts,
-                    entity.photo
+                    entity.photo,
+                    entity.isFavorite ?:false
                 )
             }
         }
@@ -63,18 +63,20 @@ class EventsRepoImpl @Inject constructor(
 
     override suspend fun getFavEventsList() {
         return withContext(Dispatchers.IO) {
-            if(!favesDAO.doesFavEntityExsists()) {
+//            if(!favesDAO.doesFavEntityExsists()) {
                 val response = apiService.getAllFaves()
                 response.body()?.favesList?.let { list ->
                     list.map { fav ->
                         val favEntity = FavEntity(
                             fav.idUser,
-                            fav.idEvent
+                            fav.idEvent,
+                            fav.id
                         )
                         favesDAO.insertFavEntity(favEntity)
+                        eventsDAO.addToFavorite(favEntity.id_event, true)
                     }
                 }
-            }
+//            }
         }
     }
 
@@ -90,9 +92,32 @@ class EventsRepoImpl @Inject constructor(
                     entity.description,
                     entity.location,
                     entity.contacts,
-                    entity.photo
+                    entity.photo,
+                    entity.isFavorite ?:false
                 )
             }
+        }
+    }
+
+    override suspend fun favClicked(id_event: Int, isFavorite: Boolean) {
+        return withContext(Dispatchers.IO) {
+            eventsDAO.addToFavorite(id_event, isFavorite)
+            val fav = Fav(1, id_event)
+            when(isFavorite) {
+                true -> apiService.insertFav(fav)
+                false -> {
+                    apiService.deleteFav(fav)
+                    favesDAO.deleteFavEntity(fav.idUser, fav.idEvent)
+                }
+            }
+        }
+    }
+
+    override suspend fun favDelete(idUser: Int, idEvent: Int) {
+        return withContext(Dispatchers.IO) {
+            val fav = Fav(idUser, idEvent)
+            favesDAO.deleteFavEntity(fav.idUser, fav.idEvent)
+            apiService.deleteFav(fav)
         }
     }
 

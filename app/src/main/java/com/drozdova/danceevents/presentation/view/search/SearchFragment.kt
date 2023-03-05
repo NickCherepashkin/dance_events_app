@@ -66,4 +66,10 @@ class SearchFragment : Fragment(), EventListener {
     override fun showDetails(event: EventModel) {
         viewModel.showEventInfo(event)
     }
+
+    override fun onFavClicked(id: Int, isFavorite: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+
 }

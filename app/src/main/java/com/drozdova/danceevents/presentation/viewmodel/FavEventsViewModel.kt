@@ -32,6 +32,12 @@ class FavEventsViewModel @Inject constructor(
         _bundle.value = event
     }
 
+    fun deleteFavEvent(idEvent: Int) {
+        viewModelScope.launch {
+            interactor.onFavDeleteClicked(idEvent)
+        }
+    }
+
     fun onBack(){
         _bundle.value = null
         _favEventsList.apply { null }

@@ -8,5 +8,6 @@ data class EventModel (
         val description: String,
         val location: String,
         val contacts: String,
-        val photo: String
+        val photo: String,
+        val isFavorite: Boolean
 )

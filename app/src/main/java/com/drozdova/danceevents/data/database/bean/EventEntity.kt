@@ -22,5 +22,7 @@ data class EventEntity(
     @ColumnInfo(name = "contacts")
     val contacts: String,
     @ColumnInfo(name = "photo")
-    val photo: String
+    val photo: String,
+    @ColumnInfo(name = "isFavorite")
+    val isFavorite: Boolean?=false
 )

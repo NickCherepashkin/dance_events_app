@@ -15,4 +15,7 @@ interface EventsDAO {
 
     @Query("Select * from events")
     fun getEventsEntity(): List<EventEntity>
+
+    @Query("Update events set isFavorite = :isFavorite where id = :id_event")
+    fun addToFavorite(id_event: Int, isFavorite: Boolean)
 }

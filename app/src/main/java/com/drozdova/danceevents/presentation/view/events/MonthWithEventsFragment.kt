@@ -78,6 +78,11 @@ class MonthWithEventsFragment : Fragment(), EventListener {
         viewModel.showEventInfo(event)
     }
 
+    override fun onFavClicked(id: Int, isFavorite: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

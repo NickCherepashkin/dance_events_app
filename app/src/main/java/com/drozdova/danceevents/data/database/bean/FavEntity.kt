@@ -10,6 +10,7 @@ data class FavEntity (
     val id_user: Int,
     @ColumnInfo(name = "id_event")
     val id_event: Int,
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "id")
+    val id: Int
 )

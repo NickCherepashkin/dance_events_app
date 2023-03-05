@@ -9,6 +9,7 @@ class EventsInteractor @Inject constructor(
 ) {
     suspend fun getEventsList()  {
         eventsListRepo.getEventsList()
+        eventsListRepo.getFavEventsList()
     }
 
     suspend fun showEventsList() : List<EventModel> {
@@ -29,5 +30,13 @@ class EventsInteractor @Inject constructor(
 
     suspend fun searchEvents(title: String) : List<EventModel> {
         return eventsListRepo.searchEvents(title)
+    }
+
+    suspend fun onFavClicked(id_event: Int, isFavorite: Boolean) {
+        eventsListRepo.favClicked(id_event, isFavorite)
+    }
+
+    suspend fun onFavDeleteClicked(idEvent: Int) {
+        eventsListRepo.favClicked(idEvent, false)
     }
 }
