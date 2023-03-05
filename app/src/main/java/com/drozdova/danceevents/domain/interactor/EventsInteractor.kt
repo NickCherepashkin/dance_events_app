@@ -2,6 +2,7 @@ package com.drozdova.danceevents.domain.interactor
 
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import com.drozdova.danceevents.presentation.model.EventModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class EventsInteractor @Inject constructor(
@@ -20,7 +21,7 @@ class EventsInteractor @Inject constructor(
         eventsListRepo.getFavEventsList()
     }
 
-    suspend fun showFavEventsList() : List<EventModel> {
+    suspend fun showFavEventsList() : Flow<List<EventModel>> {
         return eventsListRepo.showFavEvents()
     }
 

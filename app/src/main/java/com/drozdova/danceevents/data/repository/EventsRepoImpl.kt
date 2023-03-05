@@ -9,6 +9,8 @@ import com.drozdova.danceevents.data.model.Fav
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import com.drozdova.danceevents.presentation.model.EventModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -80,21 +82,23 @@ class EventsRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun showFavEvents(): List<EventModel> {
+    override suspend fun showFavEvents(): Flow<List<EventModel>> {
         return withContext(Dispatchers.IO) {
             val favEntity = favesDAO.getFavEntity()
-            favEntity.map {entity ->
-                EventModel(
-                    entity.id,
-                    entity.title,
-                    entity.dateStart,
-                    entity.dateEnd,
-                    entity.description,
-                    entity.location,
-                    entity.contacts,
-                    entity.photo,
-                    entity.isFavorite ?:false
-                )
+            favEntity.map { list ->
+                list.map { entity ->
+                    EventModel(
+                        entity.id,
+                        entity.title,
+                        entity.dateStart,
+                        entity.dateEnd,
+                        entity.description,
+                        entity.location,
+                        entity.contacts,
+                        entity.photo,
+                        entity.isFavorite ?:false
+                    )
+                }
             }
         }
     }
