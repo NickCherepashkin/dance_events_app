@@ -15,6 +15,7 @@
         android:textSize="60sp"/>
 
     <SearchView
+        android:id="@+id/sv_events"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:searchHintIcon="@drawable/ic_search"

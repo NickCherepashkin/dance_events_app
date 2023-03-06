@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,10 +36,19 @@ class SearchFragment : Fragment(), EventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.svEvents.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.searchEventsList(newText?:"")
+                return false
+            }
+        })
+
         adapter = SearchAdapter(this)
         binding.rvSearchEvents.adapter = adapter
-
-        viewModel.searchEventsList("Cup")
 
         viewModel.searchList.observe(viewLifecycleOwner) { list ->
             adapter.submit(list)
@@ -50,6 +60,9 @@ class SearchFragment : Fragment(), EventListener {
                 bundle.putString(BundleConstants.EVENT_TITLE, event.title)
                 bundle.putString(BundleConstants.EVENT_DATE_START, event.dateStart)
                 bundle.putString(BundleConstants.EVENT_DATE_END, event.dateEnd)
+                bundle.putString(BundleConstants.EVENT_LOCATION, event.location)
+                bundle.putString(BundleConstants.EVENT_CONTACTS, event.contacts)
+                bundle.putString(BundleConstants.EVENT_PHOTO, event.photo)
                 bundle.putString(BundleConstants.EVENT_DESCRIPTION, event.description)
 
                 findNavController().navigate(R.id.action_searchFragment_to_eventInfoFragment4, bundle)

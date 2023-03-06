@@ -139,12 +139,20 @@ class EventsRepoImpl @Inject constructor(
 
     override suspend fun searchEvents(title: String): List<EventModel> {
         return withContext(Dispatchers.IO) {
-            listOf(
-//                EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(9,"Minsk Cup", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
-            )
+            val eventsEntity = eventsDAO.findEventsByTitle(title)
+            eventsEntity.map { event ->
+                EventModel(
+                    event.id,
+                    event.title,
+                    event.dateStart,
+                    event.dateEnd,
+                    event.description,
+                    event.location,
+                    event.contacts,
+                    event.photo,
+                    event.isFavorite ?: false
+                )
+            }
         }
     }
 }

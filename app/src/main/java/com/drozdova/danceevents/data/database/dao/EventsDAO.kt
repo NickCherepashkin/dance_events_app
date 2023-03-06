@@ -18,4 +18,7 @@ interface EventsDAO {
 
     @Query("Update events set isFavorite = :isFavorite where id = :id_event")
     fun addToFavorite(id_event: Int, isFavorite: Boolean)
+
+    @Query("Select * from events where title like '%' || :title || '%'")
+    fun findEventsByTitle(title: String): List<EventEntity>
 }
