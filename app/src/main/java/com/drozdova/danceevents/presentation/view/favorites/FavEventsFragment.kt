@@ -10,13 +10,13 @@ import androidx.navigation.fragment.findNavController
 import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.FragmentFavEventsBinding
 import com.drozdova.danceevents.presentation.model.EventModel
-import com.drozdova.danceevents.presentation.view.listener.EventListener
+import com.drozdova.danceevents.presentation.view.listener.FavListener
 import com.drozdova.danceevents.presentation.viewmodel.FavEventsViewModel
 import com.drozdova.danceevents.utils.BundleConstants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavEventsFragment : Fragment(), EventListener {
+class FavEventsFragment : Fragment(), FavListener {
     private var _binding: FragmentFavEventsBinding? = null
     private val binding get() = _binding!!
 
@@ -50,6 +50,9 @@ class FavEventsFragment : Fragment(), EventListener {
                 bundle.putString(BundleConstants.EVENT_TITLE, event.title)
                 bundle.putString(BundleConstants.EVENT_DATE_START, event.dateStart)
                 bundle.putString(BundleConstants.EVENT_DATE_END, event.dateEnd)
+                bundle.putString(BundleConstants.EVENT_LOCATION, event.location)
+                bundle.putString(BundleConstants.EVENT_CONTACTS, event.contacts)
+                bundle.putString(BundleConstants.EVENT_PHOTO, event.photo)
                 bundle.putString(BundleConstants.EVENT_DESCRIPTION, event.description)
 
                 findNavController().navigate(R.id.action_favEventsFragment_to_eventInfoFragment3, bundle)
@@ -60,6 +63,10 @@ class FavEventsFragment : Fragment(), EventListener {
 
     override fun showDetails(event: EventModel) {
         viewModel.showFavEventInfo(event)
+    }
+
+    override fun deleteFav(idEvent: Int) {
+       viewModel.deleteFavEvent(idEvent)
     }
 
     override fun onDestroy() {

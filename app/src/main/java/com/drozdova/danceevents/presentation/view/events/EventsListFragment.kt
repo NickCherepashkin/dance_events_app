@@ -66,6 +66,10 @@ class EventsListFragment : Fragment(), EventListener {
         viewModel.showEventInfo(event)
     }
 
+    override fun onFavClicked(id: Int, isFavorite: Boolean) {
+        viewModel.onFavClicked(id, isFavorite)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

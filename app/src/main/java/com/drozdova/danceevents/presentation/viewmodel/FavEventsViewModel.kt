@@ -23,12 +23,23 @@ class FavEventsViewModel @Inject constructor(
 
     fun showFavEventsList() {
         viewModelScope.launch {
-            _favEventsList.value = interactor.getFavEventsList()
+            interactor.getFavEventsList()
+            val favesList = interactor.showFavEventsList()
+            favesList.collect{
+                _favEventsList.value = it
+            }
+
         }
     }
 
     fun showFavEventInfo(event: EventModel) {
         _bundle.value = event
+    }
+
+    fun deleteFavEvent(idEvent: Int) {
+        viewModelScope.launch {
+            interactor.onFavDeleteClicked(idEvent)
+        }
     }
 
     fun onBack(){

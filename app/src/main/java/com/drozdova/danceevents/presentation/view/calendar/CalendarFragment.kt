@@ -21,7 +21,7 @@ class CalendarFragment : Fragment(), MonthListener {
 
     private lateinit var adapter: CalendarAdapter
 
-    private val viewModel: CalendarViewModel by viewModels()
+//    private val viewModel: CalendarViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,12 +36,7 @@ class CalendarFragment : Fragment(), MonthListener {
 
         adapter = CalendarAdapter(this)
         binding.rvCalendar.adapter = adapter
-
-        viewModel.getListOfYears()
-
-        viewModel.listOfYears.observe(viewLifecycleOwner){ list ->
-            adapter.submit(list)
-        }
+        adapter.submit()
     }
 
     override fun onDestroy() {

@@ -1,71 +1,188 @@
 package com.drozdova.danceevents.data.repository
 
+import android.util.Log
 import com.drozdova.danceevents.data.ApiService
-import com.drozdova.danceevents.data.model.Event
-import com.drozdova.danceevents.data.model.EventsResponse
+import com.drozdova.danceevents.data.database.bean.EventEntity
+import com.drozdova.danceevents.data.database.bean.FavEntity
+import com.drozdova.danceevents.data.database.dao.EventsDAO
+import com.drozdova.danceevents.data.database.dao.FavesDAO
+import com.drozdova.danceevents.data.model.Fav
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import com.drozdova.danceevents.presentation.model.EventModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class EventsRepoImpl @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val eventsDAO: EventsDAO,
+    private val favesDAO: FavesDAO
 ) : EventsRepo {
-    override suspend fun getEventsList(): List<EventModel> {
-        val response = apiService.getAllEvents()
+
+    override suspend fun getEventsList() {
         return withContext(Dispatchers.IO){
-            response.body()?.eventsList?.let { list ->
-                list.map { event ->
-                    EventModel(
-                        event.id,
-                        event.title,
-                        event.dateStart,
-                        event.dateEnd,
-                        event.description,
-                        event.location,
-                        event.contacts,
-                        event.photo
-                    )
+            if(!eventsDAO.doesEventsEntityExsists()) {
+                val response = apiService.getAllEvents()
+                response.body()?.eventsList?.let { list ->
+                    list.map { event ->
+                        val eventEntity = EventEntity(
+                            event.id,
+                            event.title,
+                            event.dateStart,
+                            event.dateEnd,
+                            event.description,
+                            event.location,
+                            event.contacts,
+                            event.photo
+                        )
+                        eventsDAO.insertEventsEntity(eventEntity)
+                    }
                 }
-            } ?: kotlin.run {
-                emptyList()
             }
         }
     }
 
-    override suspend fun getFavEventsList(): List<EventModel> {
+    override suspend fun showEventsList(): List<EventModel> {
         return withContext(Dispatchers.IO) {
-            listOf(
-//                EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(2,"Child and Youth Week", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(3,"Minsk Cup", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(4,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
-            )
+            val eventEntity = eventsDAO.getEventsEntity()
+            eventEntity.map {entity ->
+
+                val format: DateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+                val dateStart = format.format(entity.dateStart)
+                val dateEnd = format.format(entity.dateEnd)
+
+                EventModel(
+                    entity.id,
+                    entity.title,
+                    dateStart,
+                    dateEnd,
+                    entity.description,
+                    entity.location,
+                    entity.contacts,
+                    entity.photo,
+                    entity.isFavorite ?:false
+                )
+            }
         }
     }
 
-    override suspend fun getEventsInMonth(date: String): List<EventModel> {
+
+    override suspend fun getFavEventsList() {
         return withContext(Dispatchers.IO) {
-            listOf(
-//                EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(4,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
-            )
+//            if(!favesDAO.doesFavEntityExsists()) {
+                val response = apiService.getAllFaves()
+                response.body()?.favesList?.let { list ->
+                    list.map { fav ->
+                        val favEntity = FavEntity(
+                            fav.idUser,
+                            fav.idEvent,
+                            fav.id
+                        )
+                        favesDAO.insertFavEntity(favEntity)
+                        eventsDAO.addToFavorite(favEntity.id_event, true)
+                    }
+                }
+//            }
+        }
+    }
+
+    override suspend fun showFavEvents(): Flow<List<EventModel>> {
+        return withContext(Dispatchers.IO) {
+            val favEntity = favesDAO.getFavEntity()
+            favEntity.map { list ->
+                list.map { entity ->
+                    val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+                    val dateStart = format.format(entity.dateStart)
+                    val dateEnd = format.format(entity.dateEnd)
+                    EventModel(
+                        entity.id,
+                        entity.title,
+                        dateStart,
+                        dateEnd,
+                        entity.description,
+                        entity.location,
+                        entity.contacts,
+                        entity.photo,
+                        entity.isFavorite ?:false
+                    )
+                }
+            }
+        }
+    }
+
+    override suspend fun favClicked(id_event: Int, isFavorite: Boolean) {
+        return withContext(Dispatchers.IO) {
+            eventsDAO.addToFavorite(id_event, isFavorite)
+            val fav = Fav(1, id_event)
+            when(isFavorite) {
+                true -> apiService.insertFav(fav)
+                false -> {
+                    apiService.deleteFav(fav)
+                    favesDAO.deleteFavEntity(fav.idUser, fav.idEvent)
+                }
+            }
+        }
+    }
+
+    override suspend fun favDelete(idUser: Int, idEvent: Int) {
+        return withContext(Dispatchers.IO) {
+            val fav = Fav(idUser, idEvent)
+            favesDAO.deleteFavEntity(fav.idUser, fav.idEvent)
+            apiService.deleteFav(fav)
+        }
+    }
+
+
+    override suspend fun getEventsInMonth(dateStart: String, dateEnd: String): List<EventModel> {
+        return withContext(Dispatchers.IO) {
+
+            val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+            val startEventLong = format.parse(dateStart)!!.time
+            val endEventLong = format.parse(dateEnd)!!.time
+            val eventsEntity = eventsDAO.findEventsByDates(startEventLong, endEventLong)
+            eventsEntity.map { event ->
+
+                val dateStartEvent = format.format(event.dateStart)
+                val dateEndEvent = format.format(event.dateEnd)
+                EventModel(
+                    event.id,
+                    event.title,
+                    dateStartEvent,
+                    dateEndEvent,
+                    event.description,
+                    event.location,
+                    event.contacts,
+                    event.photo,
+                    event.isFavorite ?: false
+                )
+            }
         }
     }
 
     override suspend fun searchEvents(title: String): List<EventModel> {
         return withContext(Dispatchers.IO) {
-            listOf(
-//                EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(9,"Minsk Cup", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
-            )
+            val eventsEntity = eventsDAO.findEventsByTitle(title)
+            eventsEntity.map { event ->
+                val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+                val dateStart = format.format(event.dateStart)
+                val dateEnd = format.format(event.dateEnd)
+                EventModel(
+                    event.id,
+                    event.title,
+                    dateStart,
+                    dateEnd,
+                    event.description,
+                    event.location,
+                    event.contacts,
+                    event.photo,
+                    event.isFavorite ?: false
+                )
+            }
         }
     }
 }

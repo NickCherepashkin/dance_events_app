@@ -13,10 +13,10 @@ class CalendarViewModel @Inject constructor(
     private val interactor: CalendarInteractor
 ) : ViewModel() {
 
-    private val _listOfYears = MutableLiveData<List<Int>>()
-    val listOfYears : LiveData<List<Int>> = _listOfYears
-
-    fun getListOfYears() {
-        _listOfYears.value = interactor.getListOfYears()
-    }
+//    private val _listOfYears = MutableLiveData<List<Int>>()
+//    val listOfYears : LiveData<List<Int>> = _listOfYears
+//
+//    fun getListOfYears() {
+//        _listOfYears.value = interactor.getListOfYears()
+//    }
 }

@@ -25,7 +25,6 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             _searchList.value = interactor.searchEvents(title)
         }
-
     }
 
     fun showEventInfo(event: EventModel) {

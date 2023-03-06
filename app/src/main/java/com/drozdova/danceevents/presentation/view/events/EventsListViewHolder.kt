@@ -21,5 +21,12 @@ class EventsListViewHolder(
         itemView.setOnClickListener {
             eventListener.showDetails(event)
         }
+
+        view.imvFav.isSelected = event.isFavorite
+
+        view.imvFav.setOnClickListener {
+            view.imvFav.isSelected = !it.isSelected
+            eventListener.onFavClicked(event.id, it.isSelected)
+        }
     }
 }

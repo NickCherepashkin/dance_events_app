@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.YearItemBinding
 import com.drozdova.danceevents.presentation.view.listener.MonthListener
+import java.util.*
 
 class CalendarAdapter(
     private val monthListener: MonthListener
@@ -14,8 +15,10 @@ class CalendarAdapter(
 
     private var listOfYears = listOf<Int>()
 
-    fun submit(listOfYears: List<Int>) {
-        this.listOfYears = listOfYears
+    fun submit() {
+        val calendar: Calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        this.listOfYears = listOf(year, (year + 1))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {

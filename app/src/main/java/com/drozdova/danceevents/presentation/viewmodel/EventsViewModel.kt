@@ -24,9 +24,16 @@ class EventsViewModel @Inject constructor(
 
     fun showEventsList() {
         viewModelScope.launch {
-            _eventsList.value = interactor.getEventsList()
+            interactor.getEventsList()
+            _eventsList.value = interactor.showEventsList()
         }
 
+    }
+
+    fun onFavClicked(id: Int, isFavorite: Boolean) {
+        viewModelScope.launch {
+            interactor.onFavClicked(id, isFavorite)
+        }
     }
 
     fun showEventInfo(event: EventModel) {

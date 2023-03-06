@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
 import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
+import com.drozdova.danceevents.presentation.view.listener.SearchListener
 
 class SearchAdapter(
-    private val eventListener: EventListener
+    private val searchListener: SearchListener
 ) : RecyclerView.Adapter<SearchViewHolder>() {
     private var _binding: ItemEventHorBinding? = null
     private val binding get() = _binding!!
@@ -23,7 +24,7 @@ class SearchAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         _binding = ItemEventHorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchViewHolder(binding, eventListener)
+        return SearchViewHolder(binding, searchListener)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
