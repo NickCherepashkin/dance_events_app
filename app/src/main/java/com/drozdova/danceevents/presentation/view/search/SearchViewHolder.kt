@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
 import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
+import com.drozdova.danceevents.presentation.view.listener.SearchListener
 import com.squareup.picasso.Picasso
 
 class SearchViewHolder(
     private val view: ItemEventHorBinding,
-    private val eventListener: EventListener
+    private val searchListener: SearchListener
 ) : ViewHolder(view.root){
 
     fun bind(event: EventModel) {
@@ -21,7 +22,7 @@ class SearchViewHolder(
         view.imvFavDelete.visibility = View.GONE
 
         itemView.setOnClickListener {
-            eventListener.showDetails(event)
+            searchListener.showDetails(event)
         }
     }
 }

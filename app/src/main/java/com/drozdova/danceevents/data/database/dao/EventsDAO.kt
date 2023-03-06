@@ -21,4 +21,7 @@ interface EventsDAO {
 
     @Query("Select * from events where title like '%' || :title || '%'")
     fun findEventsByTitle(title: String): List<EventEntity>
+
+    @Query("Select * from events where (dateStart BETWEEN :dateStart AND :dateEnd) or (dateEnd BETWEEN :dateStart AND :dateEnd) ")
+    fun findEventsByDates(dateStart: Long, dateEnd: Long): List<EventEntity>
 }

@@ -1,5 +1,6 @@
 package com.drozdova.danceevents.data.repository
 
+import android.util.Log
 import com.drozdova.danceevents.data.ApiService
 import com.drozdova.danceevents.data.database.bean.EventEntity
 import com.drozdova.danceevents.data.database.bean.FavEntity
@@ -12,6 +13,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class EventsRepoImpl @Inject constructor(
@@ -47,11 +51,16 @@ class EventsRepoImpl @Inject constructor(
         return withContext(Dispatchers.IO) {
             val eventEntity = eventsDAO.getEventsEntity()
             eventEntity.map {entity ->
+
+                val format: DateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+                val dateStart = format.format(entity.dateStart)
+                val dateEnd = format.format(entity.dateEnd)
+
                 EventModel(
                     entity.id,
                     entity.title,
-                    entity.dateStart,
-                    entity.dateEnd,
+                    dateStart,
+                    dateEnd,
                     entity.description,
                     entity.location,
                     entity.contacts,
@@ -87,11 +96,14 @@ class EventsRepoImpl @Inject constructor(
             val favEntity = favesDAO.getFavEntity()
             favEntity.map { list ->
                 list.map { entity ->
+                    val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+                    val dateStart = format.format(entity.dateStart)
+                    val dateEnd = format.format(entity.dateEnd)
                     EventModel(
                         entity.id,
                         entity.title,
-                        entity.dateStart,
-                        entity.dateEnd,
+                        dateStart,
+                        dateEnd,
                         entity.description,
                         entity.location,
                         entity.contacts,
@@ -126,14 +138,29 @@ class EventsRepoImpl @Inject constructor(
     }
 
 
-    override suspend fun getEventsInMonth(date: String): List<EventModel> {
+    override suspend fun getEventsInMonth(dateStart: String, dateEnd: String): List<EventModel> {
         return withContext(Dispatchers.IO) {
-            listOf(
-//                EventModel(1, "Winter Cup 2023", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(4,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(10,"All2TheStep", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO"),
-//                EventModel(11,"GolJun", "25.02.2023", "26.02.2023", "kfdlsg lgdsfg gldsigf g;jipdsfug gfd;spi;ug", "IDO")
-            )
+
+            val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+            val startEventLong = format.parse(dateStart)!!.time
+            val endEventLong = format.parse(dateEnd)!!.time
+            val eventsEntity = eventsDAO.findEventsByDates(startEventLong, endEventLong)
+            eventsEntity.map { event ->
+
+                val dateStartEvent = format.format(event.dateStart)
+                val dateEndEvent = format.format(event.dateEnd)
+                EventModel(
+                    event.id,
+                    event.title,
+                    dateStartEvent,
+                    dateEndEvent,
+                    event.description,
+                    event.location,
+                    event.contacts,
+                    event.photo,
+                    event.isFavorite ?: false
+                )
+            }
         }
     }
 
@@ -141,11 +168,14 @@ class EventsRepoImpl @Inject constructor(
         return withContext(Dispatchers.IO) {
             val eventsEntity = eventsDAO.findEventsByTitle(title)
             eventsEntity.map { event ->
+                val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+                val dateStart = format.format(event.dateStart)
+                val dateEnd = format.format(event.dateEnd)
                 EventModel(
                     event.id,
                     event.title,
-                    event.dateStart,
-                    event.dateEnd,
+                    dateStart,
+                    dateEnd,
                     event.description,
                     event.location,
                     event.contacts,

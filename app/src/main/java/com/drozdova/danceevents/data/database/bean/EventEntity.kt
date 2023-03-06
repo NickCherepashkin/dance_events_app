@@ -3,6 +3,8 @@ package com.drozdova.danceevents.data.database.bean
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import java.util.*
 
 @Entity(tableName = "events")
 data class EventEntity(
@@ -12,9 +14,9 @@ data class EventEntity(
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "dateStart")
-    val dateStart: String,
+    val dateStart: Long,
     @ColumnInfo(name = "dateEnd")
-    val dateEnd: String,
+    val dateEnd: Long,
     @ColumnInfo(name = "description")
     val description: String,
     @ColumnInfo(name = "location")

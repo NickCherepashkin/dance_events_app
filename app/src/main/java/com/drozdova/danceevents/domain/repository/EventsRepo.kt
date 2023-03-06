@@ -11,6 +11,6 @@ interface EventsRepo {
     suspend fun favClicked(id_event: Int, isFavorite: Boolean)
     suspend fun favDelete(idUser: Int, idEvent: Int)
 
-    suspend fun getEventsInMonth(date: String) : List<EventModel>
+    suspend fun getEventsInMonth(dateStart: String, dateEnd: String) : List<EventModel>
     suspend fun searchEvents(title: String) : List<EventModel>
 }

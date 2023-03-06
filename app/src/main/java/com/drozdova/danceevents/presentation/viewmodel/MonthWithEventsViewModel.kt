@@ -22,11 +22,10 @@ class MonthWithEventsViewModel @Inject constructor(
     private val _bundle = MutableLiveData<EventModel?>()
     val bundle: LiveData<EventModel?> = _bundle
 
-    fun showEventsInMonth(date: String) {
+    fun showEventsInMonth(dateStart: String, dateEnd: String) {
         viewModelScope.launch {
-            _eventsListInMonth.value = interactor.getEventsInMonth(date)
+            _eventsListInMonth.value = interactor.getEventsInMonth(dateStart, dateEnd)
         }
-
     }
 
     fun showEventInfo(event: EventModel) {

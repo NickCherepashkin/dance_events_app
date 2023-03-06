@@ -12,12 +12,13 @@ import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.FragmentSearchBinding
 import com.drozdova.danceevents.presentation.model.EventModel
 import com.drozdova.danceevents.presentation.view.listener.EventListener
+import com.drozdova.danceevents.presentation.view.listener.SearchListener
 import com.drozdova.danceevents.presentation.viewmodel.SearchViewModel
 import com.drozdova.danceevents.utils.BundleConstants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(), EventListener {
+class SearchFragment : Fragment(), SearchListener {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
@@ -79,10 +80,4 @@ class SearchFragment : Fragment(), EventListener {
     override fun showDetails(event: EventModel) {
         viewModel.showEventInfo(event)
     }
-
-    override fun onFavClicked(id: Int, isFavorite: Boolean) {
-        TODO("Not yet implemented")
-    }
-
-
 }

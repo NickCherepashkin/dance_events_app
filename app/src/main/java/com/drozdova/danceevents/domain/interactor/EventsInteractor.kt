@@ -25,8 +25,8 @@ class EventsInteractor @Inject constructor(
         return eventsListRepo.showFavEvents()
     }
 
-    suspend fun getEventsInMonth(date: String) : List<EventModel> {
-        return eventsListRepo.getEventsInMonth(date)
+    suspend fun getEventsInMonth(dateStart: String, dateEnd: String) : List<EventModel> {
+        return eventsListRepo.getEventsInMonth(dateStart, dateEnd)
     }
 
     suspend fun searchEvents(title: String) : List<EventModel> {

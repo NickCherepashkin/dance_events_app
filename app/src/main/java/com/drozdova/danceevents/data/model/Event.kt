@@ -1,12 +1,13 @@
 package com.drozdova.danceevents.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class Event(
     val id: Int,
     val title: String,
-    val dateStart: String,
-    val dateEnd: String,
+    val dateStart: Long,
+    val dateEnd: Long,
     val description: String,
     val location: String,
     val contacts: String,

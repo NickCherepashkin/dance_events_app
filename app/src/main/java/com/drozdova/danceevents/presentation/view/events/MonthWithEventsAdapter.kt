@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
 import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
+import com.drozdova.danceevents.presentation.view.listener.MonthWithEventsListener
 
 class MonthWithEventsAdapter(
-    private val eventListener: EventListener
+    private val listener: MonthWithEventsListener
 ) : RecyclerView.Adapter<MonthWithEventsHolder>() {
     private var _binding: ItemEventHorBinding? = null
     private val binding get() = _binding!!
@@ -23,7 +24,7 @@ class MonthWithEventsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonthWithEventsHolder {
         _binding = ItemEventHorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MonthWithEventsHolder(binding, eventListener)
+        return MonthWithEventsHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: MonthWithEventsHolder, position: Int) {
