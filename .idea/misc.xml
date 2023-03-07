@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/drawable/day_event_selected.xml" value="0.1625" />
         <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/drawable/ic_favorite_events.xml" value="0.1545" />
         <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/drawable/ic_not_favorite.xml" value="0.1545" />
         <entry key="..\:/WORK_PROJECTS/dancer_events/dance_events_app/app/src/main/res/layout/activity_main.xml" value="0.1" />

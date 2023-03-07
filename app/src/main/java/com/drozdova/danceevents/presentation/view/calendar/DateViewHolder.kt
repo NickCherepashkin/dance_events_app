@@ -2,6 +2,7 @@ package com.drozdova.danceevents.presentation.view.calendar
 
 import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.DateItemBinding
 import com.drozdova.danceevents.presentation.view.listener.MonthListener
 
@@ -11,7 +12,7 @@ class DateViewHolder(
 ) : ViewHolder(view.root) {
 
     fun bind(year: Int, month: Int, spaces: Int, pos: Int) {
-        val value: Int
+        var value = 0
         if(pos == spaces){
             value = 1
             view.tvDate.text = "$value"
@@ -25,6 +26,11 @@ class DateViewHolder(
         if (pos % 7 == 5 || pos % 7 == 6) {
             view.tvDate.setTextColor(Color.RED)
         }
+
+        if (monthListener.selectDate(value, month, year)) {
+            view.dayLayout.setBackgroundResource(R.drawable.day_event_selected)
+        }
+
         itemView.setOnClickListener {
             monthListener.showMonthWithEvents(year, month)
         }

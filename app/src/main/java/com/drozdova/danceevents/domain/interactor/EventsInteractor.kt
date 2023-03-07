@@ -1,6 +1,7 @@
 package com.drozdova.danceevents.domain.interactor
 
 import com.drozdova.danceevents.domain.repository.EventsRepo
+import com.drozdova.danceevents.presentation.model.EventDateModel
 import com.drozdova.danceevents.presentation.model.EventModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -39,5 +40,9 @@ class EventsInteractor @Inject constructor(
 
     suspend fun onFavDeleteClicked(idEvent: Int) {
         eventsListRepo.favClicked(idEvent, false)
+    }
+
+    suspend fun getSelectedDatesList() : List<EventDateModel> {
+        return eventsListRepo.getEventsDates()
     }
 }

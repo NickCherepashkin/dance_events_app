@@ -27,7 +27,6 @@ class EventsViewModel @Inject constructor(
             interactor.getEventsList()
             _eventsList.value = interactor.showEventsList()
         }
-
     }
 
     fun onFavClicked(id: Int, isFavorite: Boolean) {

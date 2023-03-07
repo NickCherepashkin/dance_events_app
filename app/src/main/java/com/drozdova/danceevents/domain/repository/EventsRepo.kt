@@ -1,5 +1,6 @@
 package com.drozdova.danceevents.domain.repository
 
+import com.drozdova.danceevents.presentation.model.EventDateModel
 import com.drozdova.danceevents.presentation.model.EventModel
 import kotlinx.coroutines.flow.Flow
 
@@ -10,7 +11,7 @@ interface EventsRepo {
     suspend fun showFavEvents() : Flow<List<EventModel>>
     suspend fun favClicked(id_event: Int, isFavorite: Boolean)
     suspend fun favDelete(idUser: Int, idEvent: Int)
-
     suspend fun getEventsInMonth(dateStart: String, dateEnd: String) : List<EventModel>
     suspend fun searchEvents(title: String) : List<EventModel>
+    suspend fun getEventsDates() : List<EventDateModel>
 }
