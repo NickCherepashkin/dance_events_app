@@ -8,6 +8,7 @@ import com.drozdova.danceevents.data.database.dao.EventsDAO
 import com.drozdova.danceevents.data.database.dao.FavesDAO
 import com.drozdova.danceevents.data.model.Fav
 import com.drozdova.danceevents.domain.repository.EventsRepo
+import com.drozdova.danceevents.presentation.model.EventDateModel
 import com.drozdova.danceevents.presentation.model.EventModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -146,7 +147,6 @@ class EventsRepoImpl @Inject constructor(
             val endEventLong = format.parse(dateEnd)!!.time
             val eventsEntity = eventsDAO.findEventsByDates(startEventLong, endEventLong)
             eventsEntity.map { event ->
-
                 val dateStartEvent = format.format(event.dateStart)
                 val dateEndEvent = format.format(event.dateEnd)
                 EventModel(
@@ -183,6 +183,64 @@ class EventsRepoImpl @Inject constructor(
                     event.isFavorite ?: false
                 )
             }
+        }
+    }
+
+    override suspend fun getEventsDates(): List<EventDateModel> {
+        return withContext(Dispatchers.IO) {
+            val datesRangesList = eventsDAO.getEventDatesList()
+            val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+            val listResult = mutableSetOf<EventDateModel>()
+            datesRangesList.forEach { dateRange ->
+                if (dateRange.dateStart == dateRange.dateEnd) {
+                    val date = Date(dateRange.dateStart)
+                    val dateMas = format.format(date).split(".")
+
+                    val dateEvent = EventDateModel(
+                        dateMas.get(0).toInt(),
+                        dateMas.get(1).toInt(),
+                        dateMas.get(2).toInt()
+                    )
+                    listResult.add(dateEvent)
+                } else {
+                    val dateStart = Date(dateRange.dateStart)
+                    val dateEnd = Date(dateRange.dateEnd)
+
+                    val dateStartMas = format.format(dateStart).split(".")
+                    val dateEndMas = format.format(dateEnd).split(".")
+
+                    val dayStart = dateStartMas[0].toInt()
+                    val dayEnd = dateEndMas[0].toInt()
+                    val monthStart = dateStartMas[1].toInt()
+                    val monthEnd = dateEndMas[1].toInt()
+                    val year = dateStartMas[2].toInt()
+
+                    if (monthStart == monthEnd) {
+                        for ( day in dayStart .. dayEnd) {
+                            listResult.add(EventDateModel(day, monthStart, year))
+                        }
+                    } else {
+                        var daysInMonthStart = when(monthStart - 1) {
+                            1 -> 28
+                            0, 2, 4, 6, 7, 9, 11 -> 31
+                            else -> 30
+                        }
+                        // check for leap year
+                        if  ((((year % 4 == 0) && (year % 100 != 0)) ||  (year % 400 == 0)) && monthStart == 1){
+                            daysInMonthStart = 29
+                        }
+
+                        for (day in dayStart..daysInMonthStart) {
+                            listResult.add(EventDateModel(day, monthStart, year))
+                        }
+
+                        for (day in 1..dayEnd) {
+                            listResult.add(EventDateModel(day, monthEnd, year))
+                        }
+                    }
+                }
+            }
+            listResult.toList()
         }
     }
 }

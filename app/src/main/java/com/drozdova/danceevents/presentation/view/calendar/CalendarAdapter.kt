@@ -19,6 +19,7 @@ class CalendarAdapter(
         val calendar: Calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         this.listOfYears = listOf(year, (year + 1))
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
