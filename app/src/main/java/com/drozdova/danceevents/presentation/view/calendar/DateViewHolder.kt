@@ -29,6 +29,9 @@ class DateViewHolder(
 
         if (monthListener.selectDate(value, month, year)) {
             view.dayLayout.setBackgroundResource(R.drawable.day_event_selected)
+            if (pos % 7 < 5) {
+                view.tvDate.setTextColor(Color.BLACK)
+            }
         }
 
         itemView.setOnClickListener {

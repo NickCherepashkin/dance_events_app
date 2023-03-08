@@ -5,15 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.view.calendar.CalendarFragment"
-    android:background="@color/black">
+    tools:context=".presentation.view.calendar.CalendarFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginHorizontal="10dp"
         android:id="@+id/rv_calendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/year_item"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_marginHorizontal="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/year_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,7 +53,7 @@ class MonthWithEventsFragment : Fragment(), MonthWithEventsListener {
         val calendar = Calendar.getInstance()
         calendar.set(year, month, 1)
 
-        binding.cvMonth.date = calendar.timeInMillis
+        binding.cvMonth.updateDate(year, month, 1) //= calendar.timeInMillis
 
 
         adapter = MonthWithEventsAdapter(this)
@@ -62,7 +62,15 @@ class MonthWithEventsFragment : Fragment(), MonthWithEventsListener {
         viewModel.showEventsInMonth(dateStart,dateEnd)
 
         viewModel.eventsListInMonth.observe(viewLifecycleOwner){ list ->
-            adapter.submit(list)
+            if(list.isEmpty()) {
+//                binding.rvEventsInMonth.visibility = View.INVISIBLE
+                binding.tvEmptyList.visibility = View.VISIBLE
+            } else {
+//                binding.rvEventsInMonth.visibility = View.VISIBLE
+                binding.tvEmptyList.visibility = View.GONE
+                adapter.submit(list)
+            }
+
         }
 
         viewModel.bundle.observe(viewLifecycleOwner){ event ->

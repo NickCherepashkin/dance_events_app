@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="3dp"
+    android:layout_margin="10dp"
     tools:context=".presentation.view.events.MonthWithEventsFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -14,8 +14,6 @@
         android:layout_gravity="start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Январь - 2023"
-        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -27,9 +25,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ПН"
-            android:textColor="@color/white"
-            android:textSize="10sp"
+            android:text="@string/mon"
+            android:textSize="11sp"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="4dp"
@@ -38,9 +35,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ВТ"
-            android:textColor="@color/white"
-            android:textSize="10sp"
+            android:text="@string/tue"
+            android:textSize="11sp"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="4dp"
@@ -49,9 +45,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="СР"
-            android:textColor="@color/white"
-            android:textSize="10sp"
+            android:text="@string/wen"
+            android:textSize="11sp"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="4dp"
@@ -60,9 +55,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ЧТ"
-            android:textColor="@color/white"
-            android:textSize="10sp"
+            android:text="@string/thu"
+            android:textSize="11sp"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="4dp"
@@ -71,9 +65,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ПТ"
-            android:textColor="@color/white"
-            android:textSize="10sp"
+            android:text="@string/fri"
+            android:textSize="11sp"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="4dp"
@@ -82,8 +75,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="СБ"
-            android:textSize="10sp"
+            android:text="@string/sat"
+            android:textSize="11sp"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="4dp"
@@ -93,14 +86,13 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ВС"
-            android:textSize="10sp"
+            android:text="@string/sun"
+            android:textSize="11sp"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="4dp"
             android:layout_weight="1"
             android:textColor="@color/red"/>
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -110,6 +102,4 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="7"
         tools:listitem="@layout/date_item"/>
-
-
 </LinearLayout>
