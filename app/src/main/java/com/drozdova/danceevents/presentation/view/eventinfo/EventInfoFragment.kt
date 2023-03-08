@@ -2,6 +2,7 @@ package com.drozdova.danceevents.presentation.view.eventinfo
 
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,7 @@ class EventInfoFragment : Fragment() {
             binding.tviEventDate.text = date
             binding.tviEventLocation.text = location
             binding.tviEventOrgContacts.text = contacts
-            binding.tviEventDescription.text = description
+            binding.tviEventDescription.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
             Picasso.get().load(Uri.parse(photo)).into(binding.imviEventImage)
         }
 

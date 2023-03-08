@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="30dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/event_style">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imv_event_hor"
@@ -23,7 +24,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            tools:ignore="ImageContrastCheck" />
+            android:scaleType="centerCrop"
+            android:layout_margin="2dp"
+            app:shapeAppearanceOverlay="@style/corner_image_rounded"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -43,14 +46,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/event_date_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 

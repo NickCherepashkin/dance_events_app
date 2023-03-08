@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".presentation.MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -23,12 +32,12 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btm_navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemIconSize="26dp"
+        android:layout_height="80dp"
+        app:itemIconSize="40dp"
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@color/nav_background_selector"
         app:itemTextColor="@color/nav_background_selector"
-        app:itemBackground="@color/black"/>
+        app:itemBackground="@color/black" />
 
 
 

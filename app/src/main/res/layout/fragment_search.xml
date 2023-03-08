@@ -18,8 +18,9 @@
         android:id="@+id/sv_events"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:searchHintIcon="@drawable/ic_search"
-        android:queryHint="@string/search_hint"/>
+        android:queryHint="@string/search_hint"
+        android:background="@drawable/searchview_style"
+        android:layout_marginHorizontal="20dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_events"
