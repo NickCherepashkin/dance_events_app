@@ -72,7 +72,7 @@ class MonthWithEventsFragment : Fragment(), MonthWithEventsListener {
                 bundleEvent.putString(BundleConstants.EVENT_PHOTO, event.photo)
                 bundleEvent.putString(BundleConstants.EVENT_DESCRIPTION, event.description)
 
-                findNavController().navigate(R.id.action_monthWithEventsFragment_to_eventInfoFragment, bundle)
+                findNavController().navigate(R.id.action_monthWithEventsFragment_to_eventInfoFragment, bundleEvent)
                 viewModel.onBack()
             }
         }
