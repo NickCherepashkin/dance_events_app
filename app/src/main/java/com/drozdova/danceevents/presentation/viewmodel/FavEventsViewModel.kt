@@ -28,7 +28,6 @@ class FavEventsViewModel @Inject constructor(
             favesList.collect{
                 _favEventsList.value = it
             }
-
         }
     }
 
@@ -44,6 +43,6 @@ class FavEventsViewModel @Inject constructor(
 
     fun onBack(){
         _bundle.value = null
-        _favEventsList.apply { null }
+        _favEventsList.apply { value = emptyList() }
     }
 }

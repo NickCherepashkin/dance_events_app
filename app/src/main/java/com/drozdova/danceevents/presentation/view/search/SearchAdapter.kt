@@ -1,10 +1,10 @@
 package com.drozdova.danceevents.presentation.view.search
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
-import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
 import com.drozdova.danceevents.presentation.view.listener.SearchListener
 
@@ -16,6 +16,7 @@ class SearchAdapter(
 
     private var listSearchEvents = mutableListOf<EventModel>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submit(listSearchEvents: List<EventModel>) {
         this.listSearchEvents.clear()
         this.listSearchEvents.addAll(listSearchEvents.toMutableList())

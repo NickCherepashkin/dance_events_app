@@ -18,7 +18,6 @@ class CalendarViewHolder(
         val monthAdapter = MonthAdapter(monthListener)
         view.rvYear.adapter = monthAdapter
 
-        // закидываем список месяцев в ресайклер и год для календарьвью
         val listOfMonths = view.root.resources.getStringArray(R.array.month_array).toList()
         monthAdapter.submit(year, listOfMonths)
     }

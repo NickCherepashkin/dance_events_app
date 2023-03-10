@@ -1,5 +1,6 @@
 package com.drozdova.danceevents.presentation.view.events
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ class EventsListAdapter(
 
     private var listOfEvents = mutableListOf<EventModel>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submit(listOfEvents: List<EventModel>) {
         this.listOfEvents.clear()
         this.listOfEvents.addAll(listOfEvents.toMutableList())

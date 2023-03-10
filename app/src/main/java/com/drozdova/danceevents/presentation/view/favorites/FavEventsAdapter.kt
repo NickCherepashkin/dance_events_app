@@ -1,10 +1,10 @@
 package com.drozdova.danceevents.presentation.view.favorites
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
-import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
 import com.drozdova.danceevents.presentation.view.listener.FavListener
 
@@ -16,6 +16,7 @@ class FavEventsAdapter(
 
     private var listFavEvents = mutableListOf<EventModel>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submit(listFavEvents: List<EventModel>) {
         this.listFavEvents.clear()
         this.listFavEvents.addAll(listFavEvents.toMutableList())

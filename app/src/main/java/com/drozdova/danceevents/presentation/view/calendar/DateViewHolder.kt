@@ -12,30 +12,50 @@ class DateViewHolder(
 ) : ViewHolder(view.root) {
 
     fun bind(year: Int, month: Int, spaces: Int, pos: Int) {
-        var value = 0
-        if(pos == spaces){
-            value = 1
-            view.tvDate.text = "$value"
-        } else if (pos > spaces) {
-            value = 1 + (pos - spaces)
-            view.tvDate.text = "$value"
-        } else {
-            view.tvDate.text = ""
-        }
 
-        if (pos % 7 == 5 || pos % 7 == 6) {
-            view.tvDate.setTextColor(Color.RED)
-        }
+        val value = fillingInDays(spaces, pos)
+        view.tvDate.text = value
 
-        if (monthListener.selectDate(value, month, year)) {
-            view.dayLayout.setBackgroundResource(R.drawable.day_event_selected)
-            if (pos % 7 < 5) {
-                view.tvDate.setTextColor(Color.BLACK)
-            }
-        }
+        if (value.isNotEmpty()) {
+            selectWeekendDays(pos)
+            checkEventDay(value.toInt(), month, year, pos)}
 
         itemView.setOnClickListener {
             monthListener.showMonthWithEvents(year, month)
         }
+    }
+
+    private fun fillingInDays(spaces: Int, pos: Int) : String {
+        return if(pos == spaces){
+            FIRST_DAY_IN_MONTH
+        } else if (pos > spaces) {
+            "${(1 + (pos - spaces))}"
+        } else {
+            EMPTY_SPACE_IN_MONTH
+        }
+    }
+
+    private fun selectWeekendDays(pos: Int) {
+        if (pos % DAYS_IN_WEEK == POS_SATURDAY || pos % DAYS_IN_WEEK == POS_SUNDAY) {
+            view.tvDate.setTextColor(Color.RED)
+        }
+    }
+
+    fun checkEventDay(day: Int, month: Int, year: Int, pos: Int) {
+        if (monthListener.selectDate(day, month, year)) {
+            view.dayLayout.setBackgroundResource(R.drawable.day_event_selected)
+            if (pos % DAYS_IN_WEEK < POS_SATURDAY) {
+                view.tvDate.setTextColor(Color.BLACK)
+            }
+        }
+    }
+
+    companion object {
+        const val DAYS_IN_WEEK = 7
+        const val POS_SATURDAY = 5
+        const val POS_SUNDAY = 6
+
+        const val EMPTY_SPACE_IN_MONTH = ""
+        const val FIRST_DAY_IN_MONTH = "1"
     }
 }
