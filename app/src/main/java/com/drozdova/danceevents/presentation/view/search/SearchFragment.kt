@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.FragmentSearchBinding
 import com.drozdova.danceevents.presentation.model.EventModel
-import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.view.listener.SearchListener
 import com.drozdova.danceevents.presentation.viewmodel.SearchViewModel
 import com.drozdova.danceevents.utils.BundleConstants

@@ -1,6 +1,5 @@
 package com.drozdova.danceevents.data.repository
 
-import android.util.Log
 import com.drozdova.danceevents.data.ApiService
 import com.drozdova.danceevents.data.database.bean.EventEntity
 import com.drozdova.danceevents.data.database.bean.FavEntity

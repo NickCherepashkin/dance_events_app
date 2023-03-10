@@ -1,7 +1,6 @@
 package com.drozdova.danceevents.data.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 data class Event(
     val id: Int,

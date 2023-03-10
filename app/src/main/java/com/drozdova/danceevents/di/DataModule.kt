@@ -1,9 +1,7 @@
 package com.drozdova.danceevents.di
 
 import com.drozdova.danceevents.data.ApiService
-import com.drozdova.danceevents.data.repository.CalendarRepoImpl
 import com.drozdova.danceevents.data.repository.EventsRepoImpl
-import com.drozdova.danceevents.domain.repository.CalendarRepo
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import dagger.Binds
 import dagger.Module
@@ -16,9 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataModule {
-    @Binds
-    abstract fun bindCalendarRepository(repositoryImpl: CalendarRepoImpl): CalendarRepo
- 
     @Binds
     abstract fun bindEventsRepository(repositoryImpl: EventsRepoImpl): EventsRepo
 

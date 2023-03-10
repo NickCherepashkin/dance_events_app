@@ -1,5 +1,6 @@
 package com.drozdova.danceevents.presentation.view.calendar
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ class CalendarAdapter(
 
     private var listOfYears = listOf<Int>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submit() {
         val calendar: Calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)

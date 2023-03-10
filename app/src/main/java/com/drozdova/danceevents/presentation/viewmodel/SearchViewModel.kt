@@ -33,6 +33,6 @@ class SearchViewModel @Inject constructor(
 
     fun onBack(){
         _bundle.value = null
-        _searchList.apply { null }
+        _searchList.apply { value = emptyList() }
     }
 }
