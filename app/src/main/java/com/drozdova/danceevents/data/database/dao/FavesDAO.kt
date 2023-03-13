@@ -2,7 +2,6 @@ package com.drozdova.danceevents.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.drozdova.danceevents.data.database.bean.EventEntity
 import com.drozdova.danceevents.data.database.bean.FavEntity
@@ -10,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavesDAO {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     fun insertFavEntity(favEntity: FavEntity)
 
     @Query("Select(Select COUNT(*) from fav_events) != 0")
@@ -21,4 +20,7 @@ interface FavesDAO {
 
     @Query("Delete from fav_events where id_user = :idUser and id_event = :idEvent")
     fun deleteFavEntity(idUser: Int, idEvent: Int)
+
+    @Query("Delete from fav_events")
+    fun clearFavTable()
 }

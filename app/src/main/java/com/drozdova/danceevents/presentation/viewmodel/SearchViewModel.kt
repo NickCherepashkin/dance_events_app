@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,9 +22,17 @@ class SearchViewModel @Inject constructor(
     private val _bundle = MutableLiveData<EventModel?>()
     val bundle: LiveData<EventModel?> = _bundle
 
+    private val _errorMessage = MutableLiveData<Int>()
+    val errorMessage : LiveData<Int> = _errorMessage
+
     fun searchEventsList(title: String) {
         viewModelScope.launch {
-            _searchList.value = interactor.searchEvents(title)
+            try {
+                _searchList.value = interactor.searchEvents(title)
+            } catch (error: Exception) {
+                _errorMessage.value = R.string.error_search
+            }
+
         }
     }
 

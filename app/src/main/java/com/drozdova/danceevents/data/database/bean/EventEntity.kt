@@ -3,8 +3,6 @@ package com.drozdova.danceevents.data.database.bean
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import java.util.*
 
 @Entity(tableName = "events")
 data class EventEntity(

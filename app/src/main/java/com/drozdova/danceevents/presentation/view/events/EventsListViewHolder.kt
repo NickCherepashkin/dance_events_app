@@ -2,9 +2,10 @@ package com.drozdova.danceevents.presentation.view.events
 
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.ItemEventVerBinding
-import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.drozdova.danceevents.presentation.model.EventModel
+import com.drozdova.danceevents.presentation.view.listener.EventListener
 import com.squareup.picasso.Picasso
 
 class EventsListViewHolder(
@@ -16,7 +17,8 @@ class EventsListViewHolder(
         view.eventTitle.text = event.title
         view.eventDateStart.text = event.dateStart
         view.eventDateEnd.text = event.dateEnd
-        Picasso.get().load(Uri.parse(event.photo)).into(view.imvEventVer)
+        Picasso.get().load(Uri.parse(event.photo)).placeholder(R.drawable.default_img).into(view.imvEventVer)
+
 
         itemView.setOnClickListener {
             eventListener.showDetails(event)

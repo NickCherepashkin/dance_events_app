@@ -42,4 +42,16 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </string-array>
+
+    <!-- errors -->
+    <string name="error_geting_list_ev_dates">Ошибка получения списка дат событий</string>
+    <string name="error_server_working">Ошибка работы сервера</string>
+    <string name="error_database_working">Ошибка работы c базой данных</string>
+    <string name="error_search">Ошибка поиска</string>
+    <string name="error_get_list_events">Ошибка получения списка событий</string>
+    <string name="error_del_fav">Ошибка удаления события из списка "Избранное"</string>
+    <string name="error_show_fav">Ошибка получения списка событий "Избранное"</string>
+    <string name="error_add_fav">Ошибка добавления события в "Избранное"</string>
+    <string name="empty_fav_list">Список \nотслеживаемых\n событий пуст</string>
+
 </resources>

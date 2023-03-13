@@ -1,9 +1,11 @@
 package com.drozdova.danceevents.presentation.view.events
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,6 +44,7 @@ class EventsListFragment : Fragment(), EventListener {
         viewModel.showEventsList()
 
         viewModel.eventsList.observe(viewLifecycleOwner){ list ->
+            Log.w("LIST", list.toString())
             adapter.submit(list)
         }
 
@@ -59,6 +62,14 @@ class EventsListFragment : Fragment(), EventListener {
                 findNavController().navigate(R.id.action_eventsListFragment_to_eventInfoFragment2, bundle)
                 viewModel.onBack()
             }
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(context, getString(message), Toast.LENGTH_LONG).show()
+        }
+
+        viewModel.visibility.observe(viewLifecycleOwner) {
+            binding.messNotEvents.visibility = it
         }
     }
 

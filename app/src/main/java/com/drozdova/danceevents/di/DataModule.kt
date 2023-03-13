@@ -18,7 +18,7 @@ abstract class DataModule {
     abstract fun bindEventsRepository(repositoryImpl: EventsRepoImpl): EventsRepo
 
     companion object {
-        private const val BASE_URL = "http://192.168.100.4:8080"
+        private const val BASE_URL = "http://192.168.205.28:8080"
 
         @Provides
         fun provideApiService(retrofit: Retrofit) : ApiService{

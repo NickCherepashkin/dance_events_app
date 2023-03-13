@@ -1,5 +1,7 @@
 package com.drozdova.danceevents.data.repository
 
+import android.database.SQLException
+import android.util.Log
 import com.drozdova.danceevents.data.ApiService
 import com.drozdova.danceevents.data.database.bean.EventEntity
 import com.drozdova.danceevents.data.database.bean.FavEntity
@@ -9,10 +11,13 @@ import com.drozdova.danceevents.data.model.Fav
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import com.drozdova.danceevents.presentation.model.EventDateModel
 import com.drozdova.danceevents.presentation.model.EventModel
+import com.drozdova.danceevents.utils.ResultCodes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,11 +29,12 @@ class EventsRepoImpl @Inject constructor(
     private val favesDAO: FavesDAO
 ) : EventsRepo {
 
-    override suspend fun getEventsList() {
+    override suspend fun getEventsList() : Int {
         return withContext(Dispatchers.IO){
-            if(!eventsDAO.doesEventsEntityExsists()) {
+            try {
                 val response = apiService.getAllEvents()
                 response.body()?.eventsList?.let { list ->
+                    eventsDAO.clearEventsTable()
                     list.map { event ->
                         val eventEntity = EventEntity(
                             event.id,
@@ -42,8 +48,17 @@ class EventsRepoImpl @Inject constructor(
                         )
                         eventsDAO.insertEventsEntity(eventEntity)
                     }
+                } ?: kotlin.run {
+                    emptyList<EventModel>()
                 }
+            } catch (error: SQLException) {
+                return@withContext ResultCodes.RESULT_SQL_ERROR
+            } catch (error: SocketTimeoutException) {
+                return@withContext ResultCodes.RESULT_SERVER_CONNECT_ERROR
+            } catch (error: ConnectException){
+                return@withContext ResultCodes.RESULT_SUCCESS
             }
+            return@withContext ResultCodes.RESULT_SUCCESS
         }
     }
 
@@ -71,12 +86,12 @@ class EventsRepoImpl @Inject constructor(
         }
     }
 
-
-    override suspend fun getFavEventsList() {
+    override suspend fun getFavEventsList() : Int {
         return withContext(Dispatchers.IO) {
-//            if(!favesDAO.doesFavEntityExsists()) {
+            try {
                 val response = apiService.getAllFaves()
                 response.body()?.favesList?.let { list ->
+                    favesDAO.clearFavTable()
                     list.map { fav ->
                         val favEntity = FavEntity(
                             fav.idUser,
@@ -87,7 +102,14 @@ class EventsRepoImpl @Inject constructor(
                         eventsDAO.addToFavorite(favEntity.id_event, true)
                     }
                 }
-//            }
+            } catch (error:SQLException) {
+                return@withContext ResultCodes.RESULT_SQL_ERROR
+            } catch (error: SocketTimeoutException) {
+                return@withContext ResultCodes.RESULT_SERVER_CONNECT_ERROR
+            }  catch (error: ConnectException){
+                return@withContext ResultCodes.RESULT_SUCCESS
+            }
+            return@withContext ResultCodes.RESULT_SUCCESS
         }
     }
 
@@ -136,7 +158,6 @@ class EventsRepoImpl @Inject constructor(
             apiService.deleteFav(fav)
         }
     }
-
 
     override suspend fun getEventsInMonth(dateStart: String, dateEnd: String): List<EventModel> {
         return withContext(Dispatchers.IO) {
@@ -187,58 +208,66 @@ class EventsRepoImpl @Inject constructor(
 
     override suspend fun getEventsDates(): List<EventDateModel> {
         return withContext(Dispatchers.IO) {
-            val datesRangesList = eventsDAO.getEventDatesList()
-            val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
             val listResult = mutableSetOf<EventDateModel>()
-            datesRangesList.forEach { dateRange ->
-                if (dateRange.dateStart == dateRange.dateEnd) {
-                    val date = Date(dateRange.dateStart)
-                    val dateMas = format.format(date).split(".")
+            try {
+                val datesRangesList = eventsDAO.getEventDatesList()
+                val format = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
 
-                    val dateEvent = EventDateModel(
-                        dateMas.get(0).toInt(),
-                        dateMas.get(1).toInt(),
-                        dateMas.get(2).toInt()
-                    )
-                    listResult.add(dateEvent)
-                } else {
-                    val dateStart = Date(dateRange.dateStart)
-                    val dateEnd = Date(dateRange.dateEnd)
+                Log.w("listDates", datesRangesList.toString())
 
-                    val dateStartMas = format.format(dateStart).split(".")
-                    val dateEndMas = format.format(dateEnd).split(".")
+                datesRangesList.forEach { dateRange ->
+                    if (dateRange.dateStart == dateRange.dateEnd) {
+                        val date = Date(dateRange.dateStart)
+                        val dateMas = format.format(date).split(".")
 
-                    val dayStart = dateStartMas[0].toInt()
-                    val dayEnd = dateEndMas[0].toInt()
-                    val monthStart = dateStartMas[1].toInt()
-                    val monthEnd = dateEndMas[1].toInt()
-                    val year = dateStartMas[2].toInt()
-
-                    if (monthStart == monthEnd) {
-                        for ( day in dayStart .. dayEnd) {
-                            listResult.add(EventDateModel(day, monthStart, year))
-                        }
+                        val dateEvent = EventDateModel(
+                            dateMas.get(0).toInt(),
+                            dateMas.get(1).toInt(),
+                            dateMas.get(2).toInt()
+                        )
+                        listResult.add(dateEvent)
                     } else {
-                        var daysInMonthStart = when(monthStart - 1) {
-                            1 -> 28
-                            0, 2, 4, 6, 7, 9, 11 -> 31
-                            else -> 30
-                        }
-                        // check for leap year
-                        if  ((((year % 4 == 0) && (year % 100 != 0)) ||  (year % 400 == 0)) && monthStart == 1){
-                            daysInMonthStart = 29
-                        }
+                        val dateStart = Date(dateRange.dateStart)
+                        val dateEnd = Date(dateRange.dateEnd)
 
-                        for (day in dayStart..daysInMonthStart) {
-                            listResult.add(EventDateModel(day, monthStart, year))
-                        }
+                        val dateStartMas = format.format(dateStart).split(".")
+                        val dateEndMas = format.format(dateEnd).split(".")
 
-                        for (day in 1..dayEnd) {
-                            listResult.add(EventDateModel(day, monthEnd, year))
+                        val dayStart = dateStartMas[0].toInt()
+                        val dayEnd = dateEndMas[0].toInt()
+                        val monthStart = dateStartMas[1].toInt()
+                        val monthEnd = dateEndMas[1].toInt()
+                        val year = dateStartMas[2].toInt()
+
+                        if (monthStart == monthEnd) {
+                            for ( day in dayStart .. dayEnd) {
+                                listResult.add(EventDateModel(day, monthStart, year))
+                            }
+                        } else {
+                            var daysInMonthStart = when(monthStart - 1) {
+                                1 -> 28
+                                0, 2, 4, 6, 7, 9, 11 -> 31
+                                else -> 30
+                            }
+                            // check for leap year
+                            if  ((((year % 4 == 0) && (year % 100 != 0)) ||  (year % 400 == 0)) && monthStart == 1){
+                                daysInMonthStart = 29
+                            }
+
+                            for (day in dayStart..daysInMonthStart) {
+                                listResult.add(EventDateModel(day, monthStart, year))
+                            }
+
+                            for (day in 1..dayEnd) {
+                                listResult.add(EventDateModel(day, monthEnd, year))
+                            }
                         }
                     }
                 }
+            } catch (e: SQLException) {
+                Log.w("listDates", e)
             }
+
             listResult.toList()
         }
     }

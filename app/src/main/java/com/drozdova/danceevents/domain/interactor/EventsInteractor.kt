@@ -1,25 +1,31 @@
 package com.drozdova.danceevents.domain.interactor
 
+import android.util.Log
 import com.drozdova.danceevents.domain.repository.EventsRepo
 import com.drozdova.danceevents.presentation.model.EventDateModel
 import com.drozdova.danceevents.presentation.model.EventModel
+import com.drozdova.danceevents.utils.ResultCodes
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class EventsInteractor @Inject constructor(
     private val eventsListRepo: EventsRepo
 ) {
-    suspend fun getEventsList()  {
-        eventsListRepo.getEventsList()
-        eventsListRepo.getFavEventsList()
+    suspend fun getEventsList() : Int {
+        var result = eventsListRepo.getEventsList()
+        if (result == ResultCodes.RESULT_SUCCESS) {
+            result = eventsListRepo.getFavEventsList()
+        }
+        Log.w("resultCore", "$result")
+        return result
     }
 
     suspend fun showEventsList() : List<EventModel> {
         return eventsListRepo.showEventsList()
     }
 
-    suspend fun getFavEventsList() {
-        eventsListRepo.getFavEventsList()
+    suspend fun getFavEventsList() : Int {
+        return eventsListRepo.getFavEventsList()
     }
 
     suspend fun showFavEventsList() : Flow<List<EventModel>> {
@@ -43,6 +49,7 @@ class EventsInteractor @Inject constructor(
     }
 
     suspend fun getSelectedDatesList() : List<EventDateModel> {
+        Log.w("error", "error 2")
         return eventsListRepo.getEventsDates()
     }
 }
