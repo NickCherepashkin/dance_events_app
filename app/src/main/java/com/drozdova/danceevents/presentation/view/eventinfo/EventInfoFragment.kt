@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.FragmentEventInfoBinding
 import com.drozdova.danceevents.utils.BundleConstants
 import com.squareup.picasso.Picasso
@@ -41,7 +42,7 @@ class EventInfoFragment : Fragment() {
             binding.tviEventLocation.text = location
             binding.tviEventOrgContacts.text = contacts
             binding.tviEventDescription.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
-            Picasso.get().load(Uri.parse(photo)).into(binding.imviEventImage)
+            Picasso.get().load(Uri.parse(photo)).placeholder(R.drawable.default_img).into(binding.imviEventImage)
         }
 
         binding.tviEventDescription.movementMethod = ScrollingMovementMethod()

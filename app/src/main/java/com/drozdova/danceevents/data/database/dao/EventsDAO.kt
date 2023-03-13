@@ -28,4 +28,7 @@ interface EventsDAO {
 
     @Query("Select dateStart, dateEnd from events")
     fun getEventDatesList() : List<EventDatesRange>
+
+    @Query("Delete from events")
+    fun clearEventsTable()
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -38,12 +39,18 @@ class CalendarFragment : Fragment(), MonthListener {
 
         adapter = CalendarAdapter(this)
         binding.rvCalendar.adapter = adapter
+        selectedDatesList = emptyList()
+        adapter.submit()
 
         viewModel.getEventsList()
 
-        viewModel.listOfDates.observe(viewLifecycleOwner) { list ->
+        viewModel.listOfEventsDates.observe(viewLifecycleOwner) { list ->
             selectedDatesList = list
             adapter.submit()
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(context, getString(message), Toast.LENGTH_LONG).show()
         }
     }
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.databinding.ItemEventHorBinding
 import com.drozdova.danceevents.presentation.model.EventModel
 import com.drozdova.danceevents.presentation.view.listener.MonthWithEventsListener
@@ -17,7 +18,7 @@ class MonthWithEventsHolder(
     fun bind(event: EventModel) {
         view.eventTitle.text = event.title
         view.eventDateStart.text = "${event.dateStart} - ${event.dateEnd}"
-        Picasso.get().load(Uri.parse(event.photo)).into(view.imvEventHor)
+        Picasso.get().load(Uri.parse(event.photo)).placeholder(R.drawable.default_img).into(view.imvEventHor)
 
         view.imvFavDelete.visibility = View.GONE
 

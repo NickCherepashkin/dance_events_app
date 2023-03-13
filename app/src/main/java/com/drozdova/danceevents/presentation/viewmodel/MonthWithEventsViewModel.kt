@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.drozdova.danceevents.R
 import com.drozdova.danceevents.domain.interactor.EventsInteractor
 import com.drozdova.danceevents.presentation.model.EventDateModel
 import com.drozdova.danceevents.presentation.model.EventModel
@@ -29,11 +30,18 @@ class MonthWithEventsViewModel @Inject constructor(
     private val _visibility = MutableLiveData<Int>()
     val visibility: LiveData<Int> = _visibility
 
+    private val _errorMessage = MutableLiveData<Int>()
+    val errorMessage : LiveData<Int> = _errorMessage
 
-    fun showEventsInMonth(dateStart: String, dateEnd: String) {
+
+    private fun showEventsInMonth(dateStart: String, dateEnd: String) {
         viewModelScope.launch {
-            _eventsListInMonth.value = interactor.getEventsInMonth(dateStart, dateEnd)
-            setVisibility()
+            try {
+                _eventsListInMonth.value = interactor.getEventsInMonth(dateStart, dateEnd)
+                setVisibility()
+            } catch (error: Exception) {
+                _errorMessage.value = R.string.error_get_list_events
+            }
         }
     }
 
@@ -53,7 +61,7 @@ class MonthWithEventsViewModel @Inject constructor(
         showEventsInMonth(dateStart, dateEnd)
     }
 
-    fun setVisibility() {
+    private fun setVisibility() {
         if (_eventsListInMonth.value != emptyList<EventModel>()) {
             _visibility.value = View.GONE
         } else {
